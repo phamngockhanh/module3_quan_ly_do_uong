@@ -79,10 +79,12 @@ CREATE TABLE `hoa_don` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_nguoi_dung` int DEFAULT NULL,
   `ngay_dat` datetime DEFAULT NULL,
-  `trang_thai` tinyint(1) DEFAULT NULL,
+  `id_trang_thai` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_nguoi_dung` (`id_nguoi_dung`),
-  CONSTRAINT `hoa_don_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `nguoi_dung` (`id`)
+  KEY `id_trang_thai` (`id_trang_thai`),
+  CONSTRAINT `hoa_don_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `nguoi_dung` (`id`),
+  CONSTRAINT `hoa_don_ibfk_2` FOREIGN KEY (`id_trang_thai`) REFERENCES `trang_thai_hoa_don` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -195,7 +197,7 @@ CREATE TABLE `san_pham` (
   `hinh_anh` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_loai_san_pham` (`id_loai_san_pham`),
-  CONSTRAINT `san_pham_ibfk_1` FOREIGN KEY (`id_loai_san_pham`) REFERENCES `san_pham` (`id`)
+  CONSTRAINT `san_pham_ibfk_1` FOREIGN KEY (`id_loai_san_pham`) REFERENCES `loai_san_pham` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,4 +295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-26 15:14:29
+-- Dump completed on 2025-05-26 16:42:31
