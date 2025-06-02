@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `quan_ly_ban_do_uong` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+gio_hangCREATE DATABASE  IF NOT EXISTS `quan_ly_ban_do_uong` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `quan_ly_ban_do_uong`;
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
