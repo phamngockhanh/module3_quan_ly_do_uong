@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.nav-bg-color {
+    background-color: rgb(19, 139, 0);
+}
+
+.admin-nav {
+    color: white;
+}
+
+.side-bar {
+    background-color: rgb(65, 65, 65);
+    height: 100vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    height: 20%;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid rgb(165, 165, 165);
+}
+
+.brand-name p {
+    margin: 0;
+    font-size: 150%;
+    font-weight: bold;
+    color: blanchedalmond;
+}
+
+.side-bar-item {
+    height: 10%;
+    width: 90%;
+    margin: 0 auto;
+    /* background-color: blueviolet; */
+    border-bottom: 2px solid rgb(165, 165, 165);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-bar-item p{
+    color: azure;
+    font-size: large;
+}
