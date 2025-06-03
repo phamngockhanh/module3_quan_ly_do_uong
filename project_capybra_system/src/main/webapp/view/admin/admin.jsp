@@ -1,10 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="basePath" value="${pageContext.request.contextPath}" />
+<c:set var="adminAssetsPath" value="${basePath}/assets/admin" />
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Management</title>
     <!-- <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" /> -->
-    <link rel="stylesheet" href="./assets/admin/css/styles.min.css"/>
+    <link rel="stylesheet" href="${adminAssetsPath}/css/styles.min.css"/>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -174,7 +177,7 @@
                                         <tr>
                                             <td class="px-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="./assets/admin/images/profile/user-3.jpg" class="rounded-circle"
+                                                    <img src="${adminAssetsPath}/images/profile/user-3.jpg" class="rounded-circle"
                                                          width="40"
                                                          alt="flexy"/>
                                                     <div class="ms-3">
@@ -194,7 +197,7 @@
                                         <tr>
                                             <td class="px-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="./assets/admin/images/profile/user-5.jpg" class="rounded-circle"
+                                                    <img src="${adminAssetsPath}/images/profile/user-5.jpg" class="rounded-circle"
                                                          width="40"
                                                          alt="flexy"/>
                                                     <div class="ms-3">
@@ -216,7 +219,7 @@
                                         <tr>
                                             <td class="px-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="./assets/admin/images/profile/user-6.jpg" class="rounded-circle"
+                                                    <img src="${adminAssetsPath}/images/profile/user-6.jpg" class="rounded-circle"
                                                          width="40"
                                                          alt="flexy"/>
                                                     <div class="ms-3">
@@ -238,7 +241,7 @@
                                         <tr>
                                             <td class="px-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="./assets/admin/images/profile/user-7.jpg" class="rounded-circle"
+                                                    <img src="${adminAssetsPath}/images/profile/user-7.jpg" class="rounded-circle"
                                                          width="40"
                                                          alt="flexy"/>
                                                     <div class="ms-3">
@@ -258,7 +261,7 @@
                                         <tr>
                                             <td class="px-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="./assets/admin/images/profile/user-8.jpg" class="rounded-circle"
+                                                    <img src="${adminAssetsPath}/images/profile/user-8.jpg" class="rounded-circle"
                                                          width="40"
                                                          alt="flexy"/>
                                                     <div class="ms-3">
@@ -292,7 +295,7 @@
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row border-bottom p-3 gap-3">
                                     <div>
-                      <span><img src="./assets/admin/images/profile/user-3.jpg" class="rounded-circle" alt="user"
+                      <span><img src="${adminAssetsPath}/images/profile/user-3.jpg" class="rounded-circle" alt="user"
                                  width="50"/></span>
                                     </div>
                                     <div class="comment-text w-100">
@@ -330,7 +333,7 @@
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row border-bottom active p-3 gap-3">
                                     <div>
-                      <span><img src="./assets/admin/images/profile/user-5.jpg" class="rounded-circle" alt="user"
+                      <span><img src="${adminAssetsPath}/images/profile/user-5.jpg" class="rounded-circle" alt="user"
                                  width="50"/></span>
                                     </div>
                                     <div class="comment-text active w-100">
@@ -368,7 +371,7 @@
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row border-bottom p-3 gap-3">
                                     <div>
-                      <span><img src="./assets/admin/images/profile/user-6.jpg" class="rounded-circle" alt="user"
+                      <span><img src="${adminAssetsPath}/images/profile/user-6.jpg" class="rounded-circle" alt="user"
                                  width="50"/></span>
                                     </div>
                                     <div class="comment-text w-100">
@@ -406,7 +409,7 @@
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row p-3 gap-3">
                                     <div>
-                      <span><img src="./assets/admin/images/profile/user-4.jpg" class="rounded-circle" alt="user"
+                      <span><img src="${adminAssetsPath}/images/profile/user-4.jpg" class="rounded-circle" alt="user"
                                  width="50"/></span>
                                     </div>
                                     <div class="comment-text w-100">
@@ -521,13 +524,13 @@
         </div>
     </div>
 </div>
-<script src="./assets/admin/libs/jquery/dist/jquery.min.js"></script>
-<script src="./assets/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./assets/admin/js/sidebarmenu.js"></script>
-<script src="./assets/admin/js/app.min.js"></script>
-<script src="./assets/admin/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="./assets/admin/libs/simplebar/dist/simplebar.js"></script>
-<script src="./assets/admin/js/dashboard.js"></script>
+<script src="${adminAssetsPath}/libs/jquery/dist/jquery.min.js"></script>
+<script src="${adminAssetsPath}/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${adminAssetsPath}/js/sidebarmenu.js"></script>
+<script src="${adminAssetsPath}/js/app.min.js"></script>
+<script src="${adminAssetsPath}/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="${adminAssetsPath}/libs/simplebar/dist/simplebar.js"></script>
+<script src="${adminAssetsPath}/js/dashboard.js"></script>
 <!-- solar icons -->
 <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>

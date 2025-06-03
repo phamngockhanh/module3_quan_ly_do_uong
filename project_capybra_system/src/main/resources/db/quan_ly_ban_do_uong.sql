@@ -106,3 +106,20 @@ values
  values
  ("Nguyễn Đức Vĩnh", 1, "0987654321", "Quảng Bình", "vinh@gmail.com", 1, 1),
  ("Phan Ngọc Hoàng", 2, "0123456788", "Huế", "hoang@gmail.com", 2, 1);
+ 
+ insert into categories (name)
+ values
+ ("Cafe"),
+ ("Nước ép"),
+ ("Nước ngọt"),
+ ("Sinh tố");
+ 
+ insert into products (name, price, category_id, status, description, image)
+ values
+ ("Cafe đen", 12000, 1, 1, "", ""),
+ ("Cafe sữa", 15000, 1, 1, "", ""),
+ ("Nước ép cam", 15000, 2, 1, "", ""),
+ ("Nước ép bưởi", 17000, 2, 1, "", ""),
+ ("Sinh tố bơ", 25000, 4, 1, "", ""),
+ ("Nước mía", 10000, 2, 1, "", ""),
+ ("Coca cola", 13000, 3, 1, "", "");
