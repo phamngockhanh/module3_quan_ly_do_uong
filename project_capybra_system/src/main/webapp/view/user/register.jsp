@@ -16,35 +16,35 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
     <div class="register-box">
         <h2 class="mb-4 text-center"><b>ĐĂNG KÝ</b></h2>
-        <form>
+        <form method="post" action="">
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Họ tên</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên">
+                        <input type="text" class="form-control" name="name" id="fullName" placeholder="Nhập họ tên">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Số điện thoại</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên tài khoản</label>
-                        <input type="text" class="form-control" id="username" placeholder="Nhập tên tài khoản">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Nhập tên tài khoản">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ">
+                        <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
                     </div>
                 </div>
             </div>
