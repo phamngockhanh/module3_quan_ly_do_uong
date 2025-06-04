@@ -63,7 +63,23 @@ create table products (
     status boolean,
     description text,
     image nvarchar(100),
+    size varchar(10),
     foreign key(category_id) references categories(id)
+);
+
+create table topping(
+	id int primary key auto_increment,
+    name nvarchar(50),
+    price bigint,
+    status boolean
+);
+
+create table producttopping(
+	product_id int,
+    topping_id int,
+    primary key (product_id, topping_id),
+    foreign key (product_id) references products(id),
+    foreign key (topping_id) references topping(id) 
 );
 
 create table order_details (
@@ -114,12 +130,12 @@ values
  ("Nước ngọt"),
  ("Sinh tố");
  
- insert into products (name, price, category_id, status, description, image)
+ insert into products (name, price, category_id, status, description, image, size)
  values
- ("Cafe đen", 12000, 1, 1, "", ""),
- ("Cafe sữa", 15000, 1, 1, "", ""),
- ("Nước ép cam", 15000, 2, 1, "", ""),
- ("Nước ép bưởi", 17000, 2, 1, "", ""),
- ("Sinh tố bơ", 25000, 4, 1, "", ""),
- ("Nước mía", 10000, 2, 1, "", ""),
- ("Coca cola", 13000, 3, 1, "", "");
+ ("Cafe đen", 12000, 1, 1, "", "",""),
+ ("Cafe sữa", 15000, 1, 1, "", "",""),
+ ("Nước ép cam", 15000, 2, 1, "", "",""),
+ ("Nước ép bưởi", 17000, 2, 1, "", "",""),
+ ("Sinh tố bơ", 25000, 4, 1, "", "",""),
+ ("Nước mía", 10000, 2, 1, "", "",""),
+ ("Coca cola", 13000, 3, 1, "", "","");
