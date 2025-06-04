@@ -9,32 +9,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(value = "/register")
-public class RegisterController extends HttpServlet {
+@WebServlet(value = "/login")
+public class LoginController extends HttpServlet {
     private IAccountService accountService = new AccountService();
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        req.getRequestDispatcher("/view/user/register.jsp").forward(req,resp);
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        if(accountService.findByUsername(username) != null){
-            req.setAttribute("error", "account-existed");
-            req.getRequestDispatcher("/view/user/register.jsp");
+        String password = req.getParameter("password");
+
+        Account account = accountService.checkLogin(username, password);
+        if(account == null){
+            req.setAttribute("username", username);
+            req.setAttribute("message", "loginError");
+            req.getRequestDispatcher("/view/user/user.jsp").forward(req,resp);
         }else{
-            String password = req.getParameter("password");
-            Account account = new Account(username, password);
-            accountService.add(account);
-//            SessionUtil.set(req, "username", account.getUsername());
-//            SessionUtil.set(req, "role", "user");
+            SessionUtil.set(req, "account", account);
             resp.sendRedirect("/homepage");
         }
-
     }
 }

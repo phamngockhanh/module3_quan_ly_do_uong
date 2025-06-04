@@ -21,5 +21,5 @@ values ("admin"), ("user");
 
 insert into accounts (username, password, name, role_id)
 values
-("admin1", "123", "Nguyen Van A", 1),
-("user1", "123", "Tran Van B", 2);
+("admin1", "$2a$12$Zhv6F3F83Y.lyQy6Rz8D6.L7fISmclam4eor.5rF/VzRDEqH8hHNS", "Nguyen Van A", 1),
+("user1", "$2a$12$fTLH7nQ309P/XOYLeWckruGRGJpQMFHdwS/po47bgvjZVbpIE121K", "Tran Van B", 2);
