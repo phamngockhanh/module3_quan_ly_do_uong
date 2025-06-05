@@ -110,8 +110,8 @@ values
  
  insert into accounts (username, password, role_id, status)
  values
- ("user1", "123", 1, 1),
-  ("admin2", "123", 2, 1);
+ ("user1", "$2a$12$Zhv6F3F83Y.lyQy6Rz8D6.L7fISmclam4eor.5rF/VzRDEqH8hHNS", 1, 1),
+  ("admin2", "$2a$12$fTLH7nQ309P/XOYLeWckruGRGJpQMFHdwS/po47bgvjZVbpIE121K", 2, 1);
 
 insert into carts (order_date, status)
 values
