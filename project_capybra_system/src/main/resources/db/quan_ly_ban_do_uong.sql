@@ -62,7 +62,7 @@ create table products (
     category_id int,
     status boolean,
     description text,
-    image nvarchar(100),
+    image nvarchar(255),
     size varchar(10),
     foreign key(category_id) references categories(id)
 );
@@ -139,3 +139,7 @@ values
  ("Sinh tố bơ", 25000, 4, 1, "", "",""),
  ("Nước mía", 10000, 2, 1, "", "",""),
  ("Coca cola", 13000, 3, 1, "", "","");
+ 
+ 
+ 
+ 
