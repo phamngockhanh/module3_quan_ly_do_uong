@@ -23,7 +23,7 @@
             ĐỒ UỐNG
           </a>
           <ul class="dropdown-menu scrollable-dropdown">
-            <li><a class="dropdown-item" href="#">Cà phê</a></li>
+            <li><a class="dropdown-item" href="/product">Cà phê</a></li>
             <li><a class="dropdown-item" href="#">Trà sữa</a></li>
             <li><a class="dropdown-item" href="#">Nước ép</a></li>
             <li><a class="dropdown-item" href="#">Sinh tố</a></li>
