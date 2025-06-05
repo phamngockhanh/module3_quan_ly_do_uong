@@ -75,7 +75,7 @@
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="border-radius: 0; box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4);">
-            <form>
+            <form method="post" action="/login">
                 <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="loginModalLabel">ĐĂNG NHẬP</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
@@ -83,12 +83,12 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập" style="border-radius: 0"
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" style="border-radius: 0"
                                required/>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" style="border-radius: 0"
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" style="border-radius: 0"
                                required/>
                     </div>
                     <div class="text-end">

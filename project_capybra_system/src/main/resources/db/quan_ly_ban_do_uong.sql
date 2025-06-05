@@ -10,7 +10,7 @@ create table roles (
 create table accounts (
 	id int primary key auto_increment,
     username nvarchar(30) unique,
-    password nvarchar(50),
+    password nvarchar(255),
     role_id int,
     token nvarchar(50),
     status boolean,
@@ -74,7 +74,7 @@ create table topping(
     status boolean
 );
 
-create table producttopping(
+create table product_topping(
 	product_id int,
     topping_id int,
     primary key (product_id, topping_id),
@@ -106,12 +106,12 @@ create table cart_details (
 
 insert into roles (name)
 values
- ("khách hàng"), ("admin");
+ ("user"), ("admin");
  
- insert into accounts (username, password, role_id)
+ insert into accounts (username, password, role_id, status)
  values
- ("user1", "123", 1),
-  ("admin2", "123", 2);
+ ("user1", "123", 1, 1),
+  ("admin2", "123", 2, 1);
 
 insert into carts (order_date, status)
 values
