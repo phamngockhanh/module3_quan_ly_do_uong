@@ -27,12 +27,6 @@ create table categories (
     name nvarchar(50)
 );
 
-create table carts (
-	id int primary key auto_increment,
-    order_date datetime,
-    status boolean
-);
-
 create table users (
 	id int primary key auto_increment,
     name nvarchar(50),
@@ -40,10 +34,16 @@ create table users (
     phone nvarchar(11),
     address nvarchar(50),
     email nvarchar(50),
-    cart_id int unique,
     status boolean,
-    foreign key(account_id) references accounts(id),
-    foreign key(cart_id) references carts(id)
+    foreign key(account_id) references accounts(id)
+);
+
+create table carts (
+	id int primary key auto_increment,
+    order_date datetime,
+    user_id int unique,
+    status boolean,
+    foreign key(user_id) references users(id)
 );
 
 create table orders (
@@ -103,6 +103,17 @@ create table cart_details (
 );
 
 
+delimiter //
+	create trigger add_cart_after_create_user
+    after insert on users
+    for each row
+    begin
+		insert into carts (user_id, status)
+        values (NEW.id, true);
+    end;
+//
+delimiter ;
+
 
 insert into roles (name)
 values
@@ -112,16 +123,16 @@ values
  values
  ("user1", "$2a$12$Zhv6F3F83Y.lyQy6Rz8D6.L7fISmclam4eor.5rF/VzRDEqH8hHNS", 1, 1),
   ("admin2", "$2a$12$fTLH7nQ309P/XOYLeWckruGRGJpQMFHdwS/po47bgvjZVbpIE121K", 2, 1);
-
-insert into carts (order_date, status)
-values
-('2022-12-30', 1),
-('2024-06-10', 1);
- 
- insert into users (name, account_id, phone, address, email, cart_id, status)
+  
+  insert into users (name, account_id, phone, address, email, status)
  values
- ("Nguyễn Đức Vĩnh", 1, "0987654321", "Quảng Bình", "vinh@gmail.com", 1, 1),
- ("Phan Ngọc Hoàng", 2, "0123456788", "Huế", "hoang@gmail.com", 2, 1);
+ ("Nguyễn Đức Vĩnh", 1, "0987654321", "Quảng Bình", "vinh@gmail.com", 1),
+ ("Phan Ngọc Hoàng", 2, "0123456788", "Huế", "hoang@gmail.com", 1);
+
+-- insert into carts (user_id ,order_date, status)
+-- values
+-- (1, '2022-12-30', 1),
+-- (2, '2024-06-10', 1);
  
  insert into categories (name)
  values

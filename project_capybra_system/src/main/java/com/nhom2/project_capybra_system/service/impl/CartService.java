@@ -19,4 +19,10 @@ public class CartService implements ICartService {
     public Cart findById(Integer id) {
         return null;
     }
+
+    @Override
+    public void addByAccountId(Integer userId) {
+        Cart cart = new Cart(userId);
+        repository.add(cart);
+    }
 }

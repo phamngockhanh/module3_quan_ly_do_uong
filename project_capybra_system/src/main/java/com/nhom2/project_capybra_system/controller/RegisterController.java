@@ -1,8 +1,14 @@
 package com.nhom2.project_capybra_system.controller;
 
 import com.nhom2.project_capybra_system.entity.Account;
+import com.nhom2.project_capybra_system.entity.Cart;
+import com.nhom2.project_capybra_system.entity.User;
 import com.nhom2.project_capybra_system.service.IAccountService;
+import com.nhom2.project_capybra_system.service.ICartService;
+import com.nhom2.project_capybra_system.service.IUserService;
 import com.nhom2.project_capybra_system.service.impl.AccountService;
+import com.nhom2.project_capybra_system.service.impl.CartService;
+import com.nhom2.project_capybra_system.service.impl.UserService;
 import com.nhom2.project_capybra_system.util.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,6 +21,8 @@ import java.io.IOException;
 @WebServlet(value = "/register")
 public class RegisterController extends HttpServlet {
     private IAccountService accountService = new AccountService();
+    private IUserService userService = new UserService();
+    private ICartService cartService = new CartService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -31,8 +39,13 @@ public class RegisterController extends HttpServlet {
             String password = req.getParameter("password");
             Account account = new Account(username, password);
             accountService.add(account);
-//            SessionUtil.set(req, "username", account.getUsername());
-//            SessionUtil.set(req, "role", "user");
+            String name = req.getParameter("name");
+            String phone = req.getParameter("phone");
+            String address = req.getParameter("address");
+            String email = req.getParameter("email");
+
+            userService.addUserWithAccount(username, name, phone, address, email);
+
             resp.sendRedirect("/homepage");
         }
 
