@@ -20,6 +20,14 @@ public class Account {
     public Account() {
     }
 
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.roleId = 1;
+        this.token = null;
+        this.status = true;
+    }
+
     public Integer getId() {
         return id;
     }

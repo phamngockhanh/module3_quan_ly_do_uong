@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="basePath" value="${pageContext.request.contextPath}" />
+<c:set var="adminAssetsPath" value="${basePath}/assets/admin" />
 <header class="app-header">
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
@@ -31,7 +34,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="./assets/admin/images/profile/user-1.jpg" alt="" width="35" height="35"
+                        <img src="${adminAssetsPath}/images/profile/user-1.jpg" alt="" width="35" height="35"
                              class="rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"

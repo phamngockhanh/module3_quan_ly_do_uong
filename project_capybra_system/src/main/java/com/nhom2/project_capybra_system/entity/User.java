@@ -7,19 +7,28 @@ public class User {
     private String phone;
     private String address;
     private String email;
-    private Integer cartId;
+    private boolean status;
 
     public User() {
     }
 
-    public User(Integer id, String name, Integer accountId, String phone, String address, String email, Integer cartId) {
+    public User(Integer id, String name, Integer accountId, String phone, String address, String email, boolean status) {
         this.id = id;
         this.name = name;
         this.accountId = accountId;
         this.phone = phone;
         this.address = address;
         this.email = email;
-        this.cartId = cartId;
+        this.status = status;
+    }
+
+    public User(String name, Integer accountId, String phone, String address, String email) {
+        this.name = name;
+        this.accountId = accountId;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.status = true;
     }
 
     public Integer getId() {
@@ -70,11 +79,11 @@ public class User {
         this.email = email;
     }
 
-    public Integer getCartId() {
-        return cartId;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

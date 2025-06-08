@@ -66,95 +66,6 @@
                 </div>
             </div>
 
-
-
-
-            <!-- Đồ uống 2 -->
-            <div class="col-md-3 mb-4">
-                <img src="https://culacstudio.com/wp-content/uploads/2021/08/NG_1164-2-scaled-1.jpg"
-                     alt="Trà Đào"
-                     class="img-fluid mb-3"
-                     style="height: 200px; width: 200px; object-fit: cover; border: 1px solid yellow;">
-                <div class="icons mb-2">
-                    <a href="#" class="btn btn-sm btn-outline-warning me-2">
-                        <i class="bi bi-cart"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-eye"></i>
-                    </a>
-                </div>
-                <p class="text-secondary">Đặc biệt</p>
-                <h5 class="fw-bold">TRÀ ĐÀO</h5>
-                <p class="text-muted">45,000 VND</p>
-                <div class="text-warning">
-                    ★★★★★
-                </div>
-            </div>
-
-            <!-- Đồ uống 3 -->
-            <div class="col-md-3 mb-4">
-                <img src="https://culacstudio.com/wp-content/uploads/2021/08/NG_1164-2-scaled-1.jpg"
-                     alt="Trà Đào"
-                     class="img-fluid mb-3"
-                     style="height: 200px; width: 200px; object-fit: cover; border: 1px solid yellow;">
-                <div class="icons mb-2">
-                    <a href="#" class="btn btn-sm btn-outline-warning me-2">
-                        <i class="bi bi-cart"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-eye"></i>
-                    </a>
-                </div>
-                <p class="text-secondary">Đặc biệt</p>
-                <h5 class="fw-bold">TRÀ ĐÀO</h5>
-                <p class="text-muted">45,000 VND</p>
-                <div class="text-warning">
-                    ★★★★★
-                </div>
-            </div>
-            <!-- Đồ uống 4 -->
-            <div class="col-md-3 mb-4">
-                <img src="https://culacstudio.com/wp-content/uploads/2021/08/NG_1164-2-scaled-1.jpg"
-                     alt="Trà Đào"
-                     class="img-fluid mb-3"
-                     style="height: 200px; width: 200px; object-fit: cover; border: 1px solid yellow;">
-                <div class="icons mb-2">
-                    <a href="#" class="btn btn-sm btn-outline-warning me-2">
-                        <i class="bi bi-cart"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-eye"></i>
-                    </a>
-                </div>
-                <p class="text-secondary">Đặc biệt</p>
-                <h5 class="fw-bold">TRÀ ĐÀO</h5>
-                <p class="text-muted">45,000 VND</p>
-                <div class="text-warning">
-                    ★★★★★
-                </div>
-            </div>
-
-
-            <div class="col-md-3 mb-4">
-                <img src="https://culacstudio.com/wp-content/uploads/2021/08/NG_1164-2-scaled-1.jpg"
-                     alt="Trà Đào"
-                     class="img-fluid mb-3"
-                     style="height: 200px; width: 200px; object-fit: cover; border: 1px solid yellow;">
-                <div class="icons mb-2">
-                    <a href="#" class="btn btn-sm btn-outline-warning me-2">
-                        <i class="bi bi-cart"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-eye"></i>
-                    </a>
-                </div>
-                <p class="text-secondary">Đặc biệt</p>
-                <h5 class="fw-bold">TRÀ ĐÀO</h5>
-                <p class="text-muted">45,000 VND</p>
-                <div class="text-warning">
-                    ★★★★★
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -164,7 +75,7 @@
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="border-radius: 0; box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4);">
-            <form>
+            <form method="post" action="/login">
                 <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="loginModalLabel">ĐĂNG NHẬP</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
@@ -172,12 +83,12 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập" style="border-radius: 0"
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" style="border-radius: 0"
                                required/>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" style="border-radius: 0"
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" style="border-radius: 0"
                                required/>
                     </div>
                     <div class="text-end">

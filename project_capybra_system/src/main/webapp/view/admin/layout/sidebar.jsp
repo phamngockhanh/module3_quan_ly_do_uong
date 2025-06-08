@@ -1,10 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="basePath" value="${pageContext.request.contextPath}" />
+<c:set var="adminAssetsPath" value="${basePath}/assets/admin" />
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="./index.html" class="text-nowrap logo-img">
-                <img src="assets/admin/images/logos/logo.svg" alt=""/>
+                <img src="${adminAssetsPath}/images/logos/logo.svg" alt=""/>
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-6"></i>
@@ -18,7 +21,7 @@
                     <span class="hide-menu">Menu</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                    <a class="sidebar-link" href="/admin" aria-expanded="false">
                         <i class="ti ti-atom"></i>
                         <span class="hide-menu">Bảng điều khiển</span>
                     </a>
@@ -71,7 +74,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link justify-content-between" href="#">
+                            <a class="sidebar-link justify-content-between" href="/admin/product">
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
