@@ -75,9 +75,10 @@ create table topping(
 );
 
 create table product_topping(
+	id int primary key auto_increment,
 	product_id int,
     topping_id int,
-    primary key (product_id, topping_id),
+    unique (product_id, topping_id),
     foreign key (product_id) references products(id),
     foreign key (topping_id) references topping(id) 
 );
