@@ -63,7 +63,7 @@
                 <p class="text-muted">45,000 VND</p>
                 <div class="text-warning">
                     ★★★★★
-                </div>
+                </div>q1
             </div>
 
         </div>
