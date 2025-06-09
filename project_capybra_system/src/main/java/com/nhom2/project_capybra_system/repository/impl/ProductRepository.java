@@ -81,8 +81,6 @@ public class ProductRepository implements IProductRepository {
         return totalRecords;
     }
 
-
-
     @Override
     public int countProductWithFilter(String productName, int categoryId) {
         int totalRecords = 0;
@@ -102,8 +100,6 @@ public class ProductRepository implements IProductRepository {
         return totalRecords;
     }
 
-
-
     @Override
     public List<Product> findAllWithPagination(String productName, int categoryId,int offset, int pageSize) {
         List<Product> products = new ArrayList<>();
@@ -115,10 +111,52 @@ public class ProductRepository implements IProductRepository {
             preparedStatement.setInt(4,categoryId);
             preparedStatement.setInt(5,offset);
             preparedStatement.setInt(6,pageSize);
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                Product product = new Product();
+                product.setId(resultSet.getInt("id"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getLong("price"));
+                product.setCategoryId(resultSet.getInt("category_id"));
+                product.setStatus(resultSet.getBoolean("status"));
+                product.setDescription(resultSet.getString("description"));
+                product.setImage(resultSet.getString("image"));
+                product.setSize(resultSet.getString("size"));
+                products.add(product);
+            }
 
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return products;
     }
+
+    @Override
+    public List<Product> findAllNoneFilter(int offset, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        try(Connection connection = DatabaseUtil.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_PAGINATION)){
+            preparedStatement.setInt(1,pageSize);
+            preparedStatement.setInt(1,offset);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                Product product  = new Product();
+                product.setId(resultSet.getInt("id"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getLong("price"));
+                product.setCategoryId(resultSet.getInt("category_id"));
+                product.setStatus(resultSet.getBoolean("status"));
+                product.setDescription(resultSet.getString("description"));
+                product.setImage(resultSet.getString("image"));
+                product.setSize(resultSet.getString("size"));
+                products.add(product);
+            }
+
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return products;
+    }
+
+
 }
