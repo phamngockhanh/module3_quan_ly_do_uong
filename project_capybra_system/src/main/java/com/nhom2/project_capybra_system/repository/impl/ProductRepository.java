@@ -16,17 +16,18 @@ public class ProductRepository implements IProductRepository {
     private static final String SELECT_PRODUCT_BY_ID = "select * from products where id = ?";
     private static final String COUNT_PRODUCT = "select count(*) from products;";
     private static final String SELECT_PRODUCT_PAGINATION = "select * from products ORDER BY id LIMIT ? OFFSET ?;";
-    private static final String COUNT_PRODUCT_WITH_FILTER= "select count(*) from products where (name LIKE CONCAT('%', ?, '%') OR ? = '') AND (category_id = ? OR ? = 0)";
-    private static final String SEARCH_BY_NAME_ID_CATEGORY ="select * from products where (name like concat('%', ?, '%') OR ? = '') AND (category_id = ? OR ? = 0) LIMIT ?,?;";
+    private static final String COUNT_PRODUCT_WITH_FILTER = "select count(*) from products where (name LIKE CONCAT('%', ?, '%') OR ? = '') AND (category_id = ? OR ? = 0)";
+    private static final String SEARCH_BY_NAME_ID_CATEGORY = "select * from products where (name like concat('%', ?, '%') OR ? = '') AND (category_id = ? OR ? = 0) LIMIT ?,?;";
+
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
 
-        try(Connection connection = DatabaseUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCT);
-            ResultSet resultSet = statement.executeQuery()){
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCT);
+             ResultSet resultSet = statement.executeQuery()) {
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Product product = new Product();
 
                 product.setId(resultSet.getInt("id"));
@@ -36,7 +37,7 @@ public class ProductRepository implements IProductRepository {
                 product.setStatus(resultSet.getBoolean("status"));
                 product.setDescription(resultSet.getString("description"));
                 product.setImage(resultSet.getString("image"));
-
+                product.setSize(resultSet.getString("size"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -48,11 +49,11 @@ public class ProductRepository implements IProductRepository {
     @Override
     public Product findById(int id) {
         Product product = new Product();
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID)) {
-            preparedStatement.setInt(1,id);
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID)) {
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
                 product.setPrice(resultSet.getLong("price"));
@@ -67,12 +68,12 @@ public class ProductRepository implements IProductRepository {
         return product;
     }
 
-    public int countProduct(){
+    public int countProduct() {
         int totalRecords = 0;
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(COUNT_PRODUCT)){
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(COUNT_PRODUCT)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 totalRecords = resultSet.getInt(1);
             }
         } catch (SQLException e) {
@@ -84,35 +85,35 @@ public class ProductRepository implements IProductRepository {
     @Override
     public int countProductWithFilter(String productName, int categoryId) {
         int totalRecords = 0;
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement= connection.prepareStatement(COUNT_PRODUCT_WITH_FILTER)){
-            preparedStatement.setString(1,productName);
-            preparedStatement.setString(2,productName);
-            preparedStatement.setInt(3,categoryId);
-            preparedStatement.setInt(4,categoryId);
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(COUNT_PRODUCT_WITH_FILTER)) {
+            preparedStatement.setString(1, productName);
+            preparedStatement.setString(2, productName);
+            preparedStatement.setInt(3, categoryId);
+            preparedStatement.setInt(4, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 totalRecords = resultSet.getInt(1);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return totalRecords;
     }
 
     @Override
-    public List<Product> findAllWithPagination(String productName, int categoryId,int offset, int pageSize) {
+    public List<Product> findAllWithPagination(String productName, int categoryId, int offset, int pageSize) {
         List<Product> products = new ArrayList<>();
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_BY_NAME_ID_CATEGORY)){
-            preparedStatement.setString(1,productName);
-            preparedStatement.setString(2,productName);
-            preparedStatement.setInt(3,categoryId);
-            preparedStatement.setInt(4,categoryId);
-            preparedStatement.setInt(5,offset);
-            preparedStatement.setInt(6,pageSize);
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_BY_NAME_ID_CATEGORY)) {
+            preparedStatement.setString(1, productName);
+            preparedStatement.setString(2, productName);
+            preparedStatement.setInt(3, categoryId);
+            preparedStatement.setInt(4, categoryId);
+            preparedStatement.setInt(5, offset);
+            preparedStatement.setInt(6, pageSize);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 Product product = new Product();
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
@@ -125,7 +126,7 @@ public class ProductRepository implements IProductRepository {
                 products.add(product);
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return products;
@@ -134,13 +135,13 @@ public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> findAllNoneFilter(int offset, int pageSize) {
         List<Product> products = new ArrayList<>();
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_PAGINATION)){
-            preparedStatement.setInt(1,pageSize);
-            preparedStatement.setInt(1,offset);
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_PAGINATION)) {
+            preparedStatement.setInt(1, pageSize);
+            preparedStatement.setInt(1, offset);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                Product product  = new Product();
+            if (resultSet.next()) {
+                Product product = new Product();
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
                 product.setPrice(resultSet.getLong("price"));
@@ -152,40 +153,62 @@ public class ProductRepository implements IProductRepository {
                 products.add(product);
             }
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return products;
     }
 
 
-
     @Override
     public boolean delete(int id) {
-        String DELETE_ID="delete from products where id=?;";
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement =connection.prepareStatement(DELETE_ID);) {
-          preparedStatement.setInt(1,id);
-           int effectRow = preparedStatement.executeUpdate();
-           return effectRow==1;
+        String DELETE_ID = "delete from products where id=?;";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ID);) {
+            preparedStatement.setInt(1, id);
+            int effectRow = preparedStatement.executeUpdate();
+            return effectRow == 1;
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");
         }
 
         return false;
     }
-//    public boolean add(Product product) throws SQLException {
-//        String ADD="insert into products(name,price,category_id,status,description,image,size) value(?,?,?,?,?,?,?);";
-//        try(Connection connection=DatabaseUtil.getConnection();
-//        PreparedStatement preparedStatement= connection.prepareStatement(ADD);){
-//            preparedStatement.setString(1,product.getName());
-//            preparedStatement.setInt(2,product.getCategoryId());
-//            preparedStatement.setString(3,product.getStatus());
-//            preparedStatement.setString(4,product.getDescription());
-//            preparedStatement.setString(5,product.getImage());
-//        }
-//    }
 
+    public boolean add(Product product) {
+        String ADD = "insert into products(name,price,category_id,status,description,image,size) value(?,?,?,?,?,?,?);";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD);) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getCategoryId());
+            preparedStatement.setBoolean(4, product.getStatus());
+            preparedStatement.setString(5, product.getDescription());
+            preparedStatement.setString(6, product.getImage());
+            preparedStatement.setString(7, product.getSize());
+            int effectRow = preparedStatement.executeUpdate();
+            return effectRow == 1;
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
 
+        return false;
+    }
 
+    public boolean update(Product product) {
+        String UPDATE = "update products set name=?,price=?,category_id=?,status=? where id=?;";
+        try(Connection connection =DatabaseUtil.getConnection();
+        PreparedStatement preparedStatement= connection.prepareStatement(UPDATE);) {
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setDouble(2,product.getPrice());
+            preparedStatement.setInt(3,product.getCategoryId());
+            preparedStatement.setBoolean(4,product.getStatus());
+            preparedStatement.setInt(5,product.getId());
+            int effectRow= preparedStatement.executeUpdate();
+            return effectRow==1;
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+        return false;
+    }
 }
