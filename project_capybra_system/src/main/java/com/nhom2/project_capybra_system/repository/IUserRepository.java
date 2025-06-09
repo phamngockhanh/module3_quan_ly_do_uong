@@ -9,4 +9,6 @@ public interface IUserRepository extends IRepository<User> {
     void add(User user);
 
     List<UserDto> findAllUserAndAccount();
+
+    UserDto findUserAndAccountByUserId(int id);
 }

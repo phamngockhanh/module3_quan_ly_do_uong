@@ -9,4 +9,6 @@ public interface IUserService extends IService<User> {
     void addUserWithAccount(String username, String name, String phone, String address, String email);
 
     List<UserDto> findAllUserAndAccount();
+
+    UserDto findUserAndAccountByUserId(int id);
 }
