@@ -19,4 +19,9 @@ public class RoleService implements IRoleService {
     public Role findById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

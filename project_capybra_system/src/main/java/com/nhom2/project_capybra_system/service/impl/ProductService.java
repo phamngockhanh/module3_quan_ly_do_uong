@@ -19,4 +19,9 @@ public class ProductService implements IProductService {
     public Product findById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return  repository.delete(id);
+    }
 }

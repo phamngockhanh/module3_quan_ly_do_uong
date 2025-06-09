@@ -19,5 +19,10 @@ public class CartDetailService implements ICartDetailService {
     public CartDetail findById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }
 

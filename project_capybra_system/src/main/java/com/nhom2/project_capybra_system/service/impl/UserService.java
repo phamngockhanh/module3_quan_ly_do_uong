@@ -26,6 +26,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public void addUserWithAccount(String username, String name, String phone, String address, String email) {
         Account account = accountService.findByUsername(username);
         User user = new User(name, account.getId() , phone,address, email);

@@ -12,7 +12,13 @@ public class ToppingRepository implements IToppingRepository {
     }
 
     @Override
-    public Topping findById(Integer id) {
+    public Topping findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
 }

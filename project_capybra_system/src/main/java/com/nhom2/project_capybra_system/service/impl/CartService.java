@@ -21,6 +21,11 @@ public class CartService implements ICartService {
     }
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public void addByAccountId(Integer userId) {
         Cart cart = new Cart(userId);
         repository.add(cart);

@@ -12,7 +12,12 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public Order findById(Integer id) {
+    public Order findById(int id) {
         return null;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
     }
 }

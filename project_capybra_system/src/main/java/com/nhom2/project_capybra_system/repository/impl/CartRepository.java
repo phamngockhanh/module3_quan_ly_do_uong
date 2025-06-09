@@ -16,9 +16,16 @@ public class CartRepository implements ICartRepository {
     }
 
     @Override
-    public Cart findById(Integer id) {
+    public Cart findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+
 
     @Override
     public Boolean add(Cart cart) {

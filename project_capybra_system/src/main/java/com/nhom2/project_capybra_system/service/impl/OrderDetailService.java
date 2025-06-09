@@ -19,4 +19,9 @@ public class OrderDetailService implements IOrderDetailService {
     public OrderDetail findById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

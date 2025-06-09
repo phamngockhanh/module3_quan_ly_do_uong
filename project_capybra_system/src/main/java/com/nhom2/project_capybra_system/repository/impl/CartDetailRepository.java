@@ -12,7 +12,14 @@ public class CartDetailRepository implements ICartDetailRepository {
     }
 
     @Override
-    public CartDetail findById(Integer id) {
+    public CartDetail findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+
 }

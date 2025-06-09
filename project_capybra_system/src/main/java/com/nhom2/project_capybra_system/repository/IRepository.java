@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface IRepository <T>{
     List<T> findAll();
-    T findById(Integer id);
+    T findById(int id);
+    boolean delete( int id);
 }
 

@@ -17,9 +17,15 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User findById(Integer id) {
+    public User findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
 
     @Override
     public void add(User user) {

@@ -12,7 +12,13 @@ public class RoleRepository implements IRoleRepository {
     }
 
     @Override
-    public Role findById(Integer id) {
+    public Role findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
 }

@@ -12,7 +12,13 @@ public class CategoryRepository implements ICategoryRepository {
     }
 
     @Override
-    public Category findById(Integer id) {
+    public Category findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
 }

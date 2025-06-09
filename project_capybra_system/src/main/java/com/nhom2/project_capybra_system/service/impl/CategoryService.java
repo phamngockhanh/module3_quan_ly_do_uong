@@ -19,4 +19,9 @@ public class CategoryService implements ICategoryService {
     public Category findById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

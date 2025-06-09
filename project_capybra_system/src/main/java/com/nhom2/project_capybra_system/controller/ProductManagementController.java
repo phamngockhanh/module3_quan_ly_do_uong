@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(value = "/admin/product")
+@WebServlet(value = "/product")
 public class ProductManagementController extends HttpServlet {
     private IProductService productService = new ProductService();
     @Override

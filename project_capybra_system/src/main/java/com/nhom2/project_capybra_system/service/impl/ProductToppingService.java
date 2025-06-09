@@ -19,4 +19,9 @@ public class ProductToppingService implements IProductToppingService {
     public ProductTopping findById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

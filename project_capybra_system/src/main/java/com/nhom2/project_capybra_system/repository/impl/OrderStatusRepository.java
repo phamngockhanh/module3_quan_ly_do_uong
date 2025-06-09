@@ -12,7 +12,13 @@ public class OrderStatusRepository implements IOrderStatusRepository {
     }
 
     @Override
-    public OrderStatus findById(Integer id) {
+    public OrderStatus findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
 }
