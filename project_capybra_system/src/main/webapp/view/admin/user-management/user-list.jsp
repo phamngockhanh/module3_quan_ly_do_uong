@@ -50,7 +50,10 @@
                                         <td>${item.accountStatus ? '<span class="badge bg-success">Hoạt động</span>' :
                                                 '<span class="badge bg-danger">Bị khóa</span>' }</td>
                                         <td>
-                                            <button class="btn btn-success">Chi tiết</button>
+                                            <form method="get" action="/admin/user-management">
+                                                <input type="hidden" name="userId" value="${item.userId}">
+                                                <button class="btn btn-outline-info">Chi tiết</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </c:forEach>

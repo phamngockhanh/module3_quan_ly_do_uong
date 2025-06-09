@@ -40,5 +40,10 @@ public class UserService implements IUserService {
         return repository.findAllUserAndAccount();
     }
 
+    @Override
+    public UserDto findUserAndAccountByUserId(int id) {
+        return repository.findUserAndAccountByUserId(id);
+    }
+
 
 }
