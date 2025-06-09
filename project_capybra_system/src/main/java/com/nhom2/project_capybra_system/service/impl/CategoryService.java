@@ -20,4 +20,8 @@ public class CategoryService implements ICategoryService {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

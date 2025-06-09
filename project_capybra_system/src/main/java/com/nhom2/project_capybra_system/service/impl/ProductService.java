@@ -39,4 +39,9 @@ public class ProductService implements IProductService {
     public List<Product> findAllNoneFilter(int offset, int pageSize) {
         return repository.findAllNoneFilter(offset,pageSize);
     }
+
+    @Override
+    public boolean delete(int id) {
+        return  repository.delete(id);
+    }
 }

@@ -20,4 +20,8 @@ public class ProductToppingService implements IProductToppingService {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

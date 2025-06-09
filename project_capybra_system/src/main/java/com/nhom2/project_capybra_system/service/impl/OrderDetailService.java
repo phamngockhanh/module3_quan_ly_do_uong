@@ -20,4 +20,8 @@ public class OrderDetailService implements IOrderDetailService {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

@@ -20,5 +20,9 @@ public class CartDetailService implements ICartDetailService {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }
 

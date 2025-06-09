@@ -21,6 +21,13 @@ public class CartRepository implements ICartRepository {
     }
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+
+
+    @Override
     public Boolean add(Cart cart) {
         String sql = "insert into carts (user_id,status) values (? , ?)";
         try (Connection connection = DatabaseUtil.getConnection();
