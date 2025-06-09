@@ -16,7 +16,7 @@ public class ProductToppingService implements IProductToppingService {
     }
 
     @Override
-    public ProductTopping findById(Integer id) {
+    public ProductTopping findById(int id) {
         return null;
     }
 

@@ -7,11 +7,12 @@ public class Product {
     private Boolean status;
     private String description;
     private String image;
+    private String size;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, Long price, Integer categoryId, Boolean status, String description, String image) {
+    public Product(Integer id, String name, Long price, Integer categoryId, Boolean status, String description, String image, String size) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -19,6 +20,7 @@ public class Product {
         this.status = status;
         this.description = description;
         this.image = image;
+        this.size = size;
     }
 
     public Product(String name, long price, int categoryId, boolean status, String description, String image) {
@@ -84,5 +86,13 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

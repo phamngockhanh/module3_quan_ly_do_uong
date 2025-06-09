@@ -80,7 +80,7 @@ create table product_topping(
     topping_id int,
     unique (product_id, topping_id),
     foreign key (product_id) references products(id),
-    foreign key (topping_id) references topping(id)
+    foreign key (topping_id) references topping(id) 
 );
 
 create table order_details (
@@ -119,12 +119,12 @@ delimiter ;
 insert into roles (name)
 values
  ("user"), ("admin");
-
+ 
  insert into accounts (username, password, role_id, status)
  values
  ("user1", "$2a$12$Zhv6F3F83Y.lyQy6Rz8D6.L7fISmclam4eor.5rF/VzRDEqH8hHNS", 1, 1),
   ("admin2", "$2a$12$fTLH7nQ309P/XOYLeWckruGRGJpQMFHdwS/po47bgvjZVbpIE121K", 2, 1);
-
+  
   insert into users (name, account_id, phone, address, email, status)
  values
  ("Nguyễn Đức Vĩnh", 1, "0987654321", "Quảng Bình", "vinh@gmail.com", 1),
@@ -134,14 +134,14 @@ values
 -- values
 -- (1, '2022-12-30', 1),
 -- (2, '2024-06-10', 1);
-
+ 
  insert into categories (name)
  values
  ("Cafe"),
  ("Nước ép"),
  ("Nước ngọt"),
  ("Sinh tố");
-
+ 
  insert into products (name, price, category_id, status, description, image, size)
  values
  ("Cafe đen", 12000, 1, 1, "", "",""),
@@ -151,6 +151,8 @@ values
  ("Sinh tố bơ", 25000, 4, 1, "", "",""),
  ("Nước mía", 10000, 2, 1, "", "",""),
  ("Coca cola", 13000, 3, 1, "", "","");
+ 
+ select u.*, a.id as account_id, a.username, a.password, a.role_id from users u inner join accounts a on u.account_id = u.id;
 
 
 

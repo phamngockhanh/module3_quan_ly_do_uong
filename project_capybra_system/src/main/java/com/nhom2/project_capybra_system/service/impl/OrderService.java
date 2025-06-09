@@ -16,7 +16,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order findById(Integer id) {
+    public Order findById(int id) {
         return null;
     }
 

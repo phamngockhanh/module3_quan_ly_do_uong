@@ -12,11 +12,11 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public List<Category> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
-    public Category findById(Integer id) {
+    public Category findById(int id) {
         return null;
     }
 

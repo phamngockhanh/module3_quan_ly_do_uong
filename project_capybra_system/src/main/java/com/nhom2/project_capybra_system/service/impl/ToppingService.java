@@ -16,7 +16,7 @@ public class ToppingService implements IToppingService {
     }
 
     @Override
-    public Topping findById(Integer id) {
+    public Topping findById(int id) {
         return null;
     }
 

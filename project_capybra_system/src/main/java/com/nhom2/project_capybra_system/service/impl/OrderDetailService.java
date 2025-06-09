@@ -16,7 +16,7 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
-    public OrderDetail findById(Integer id) {
+    public OrderDetail findById(int id) {
         return null;
     }
 

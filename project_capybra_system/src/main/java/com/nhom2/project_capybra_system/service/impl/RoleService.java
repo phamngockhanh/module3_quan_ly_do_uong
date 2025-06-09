@@ -16,7 +16,7 @@ public class RoleService implements IRoleService {
     }
 
     @Override
-    public Role findById(Integer id) {
+    public Role findById(int id) {
         return null;
     }
 

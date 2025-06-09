@@ -17,20 +17,8 @@
           <a class="nav-link" href="/homepage" style="padding-left: 40px;">TRANG CHỦ</a>
         </li>
         <!-- Dropdown ĐỒ UỐNG -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-             aria-expanded="false" style="padding-left: 40px;">
-            ĐỒ UỐNG
-          </a>
-          <ul class="dropdown-menu scrollable-dropdown">
-            <li><a class="dropdown-item" href="/product">Cà phê</a></li>
-            <li><a class="dropdown-item" href="#">Trà sữa</a></li>
-            <li><a class="dropdown-item" href="#">Nước ép</a></li>
-            <li><a class="dropdown-item" href="#">Sinh tố</a></li>
-            <li><a class="dropdown-item" href="#">Soda</a></li>
-            <li><a class="dropdown-item" href="#">Trà trái cây</a></li>
-            <li><a class="dropdown-item" href="#">Cocktail</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/product" style="padding-left: 40px;">ĐỒ UỐNG</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" style="padding-left: 40px;">LIÊN HỆ</a>

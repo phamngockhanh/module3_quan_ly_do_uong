@@ -16,7 +16,7 @@ public class CartDetailService implements ICartDetailService {
     }
 
     @Override
-    public CartDetail findById(Integer id) {
+    public CartDetail findById(int id) {
         return null;
     }
 
