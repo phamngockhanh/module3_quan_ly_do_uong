@@ -39,12 +39,15 @@
 <div class="d-flex align-items-center gap-3 p-3">
     <div class="d-flex gap-2">
         <button type="button" class="btn btn-warning btn-sm">Add Category</button>
-        <button onclick="window.location.href=`/managerProduct?action=add`" type="button" class="btn btn-warning btn-sm" >Add Product</button>
+        <button onclick="window.location.href=`/managerProduct?action=add`" type="button"
+                class="btn btn-warning btn-sm">Add Product
+        </button>
     </div>
 
     <div class="ms-auto" style="width: 250px;">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                   aria-describedby="button-addon2">
             <button class="btn btn-warning" type="button" id="button-addon2">Search</button>
         </div>
     </div>
@@ -61,32 +64,36 @@
             <th scope="col">Price</th>
             <th scope="col">Category</th>
             <th scope="col">Status</th>
-            <th scope="col">Description</th>
-            <th scope="col">Image</th>
-            <th scope="col">Size</th>
             <th scope="col">Action</th>
 
         </tr>
         </thead>
         <tbody style="background-color: #fff4e5">
         <c:forEach var="product" items="${productList}" varStatus="status">
-        <tr>
-            <td>${status.count}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.categoryId}</td>
-            <td>${product.status}</td>
-            <td>${product.description}</td>
-            <td>${product.image}</td>
-            <td>${product.size}</td>
-            <td>
-                <button onclick="deleteInfo(`${product.id}`,`${product.name}`)"
-                        class="btn btn- btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="bi bi-trash text-danger me-2"></i></button>
-                <button><i class="bi bi-pencil text-primary"></i></button>
-            </td>
-        </tr>
+            <tr>
+                <td>${status.count}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>
+
+
+                    <c:forEach var="category" items="${category}">
+                        <c:if test="${product.categoryId==category.id}">
+                            ${category.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
+                <td>${product.status}</td>
+
+                <td>
+                    <button onclick="deleteInfo(`${product.id}`,`${product.name}`)"
+                            class="btn btn- btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bi bi-trash text-danger me-2"></i></button>
+                    <button onclick="window.location.href=`/managerProduct?action=update&id=${product.id}`"><i class="bi bi-pencil text-primary"></i></button>
+                </td>
+            </tr>
         </c:forEach>
+
 
         </tbody>
     </table>
@@ -101,20 +108,24 @@
                 </div>
                 <div class="modal-body">
                     <input hidden="hidden" id="deleteId" name="deleteId">
-                    <span>Bạn có muốn xoá  </span><span id="deleteName"></span> không?
+                    <span>Bạn có muốn xoá </span> <span id="deleteName"></span> không?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                    <button  class="btn btn-primary">Xoá</button>
+                    <button class="btn btn-primary">Xoá</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <script>
-    function deleteInfo(id,name) {
-        document.getElementById("deleteId").value=id;
-        document.getElementById("deleteName").value=name;
+    function deleteInfo(id, name) {
+        document.getElementById("deleteId").value = id;
+        document.getElementById("deleteName").innerText = name;
+    }
+    function updateInfo(id,name) {
+        document.getElementById("updateId").value=id;
+        document.getElementById("updateName").value=name;
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
