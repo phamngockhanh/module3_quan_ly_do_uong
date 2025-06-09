@@ -1,5 +1,6 @@
 package com.nhom2.project_capybra_system.service.impl;
 
+import com.nhom2.project_capybra_system.dto.UserDto;
 import com.nhom2.project_capybra_system.entity.Account;
 import com.nhom2.project_capybra_system.entity.User;
 import com.nhom2.project_capybra_system.repository.IUserRepository;
@@ -33,6 +34,10 @@ public class UserService implements IUserService {
 
     }
 
+    @Override
+    public List<UserDto> findAllUserAndAccount() {
+        return repository.findAllUserAndAccount();
+    }
 
 
 }

@@ -152,6 +152,6 @@ values
  ("Nước mía", 10000, 2, 1, "", "",""),
  ("Coca cola", 13000, 3, 1, "", "","");
  
- 
+ select u.*, a.id as account_id, a.username, a.password, a.role_id from users u inner join accounts a on u.account_id = u.id;
  
  
