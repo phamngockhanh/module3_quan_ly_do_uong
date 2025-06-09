@@ -24,6 +24,11 @@ public class AccountService implements IAccountService {
 
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public Account findByUsername(String username) {
         return repository.findByUsername(username);
     }

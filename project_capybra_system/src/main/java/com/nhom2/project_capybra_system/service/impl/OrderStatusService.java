@@ -20,4 +20,8 @@ public class OrderStatusService implements IOrderStatusService {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

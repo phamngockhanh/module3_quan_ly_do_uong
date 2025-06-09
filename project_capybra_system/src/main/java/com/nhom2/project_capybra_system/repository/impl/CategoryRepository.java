@@ -36,4 +36,10 @@ public class CategoryRepository implements ICategoryRepository {
     public Category findById(int id) {
         return null;
     }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
 }

@@ -29,6 +29,12 @@ public class UserRepository implements IUserRepository {
 
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+
+    @Override
     public void add(User user) {
         String sql = "insert into users (name, account_id, phone, address, email, status) " +
                 "values (?,?,?,?,?,?)";

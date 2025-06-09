@@ -23,6 +23,15 @@ public class Product {
         this.size = size;
     }
 
+    public Product(String name, long price, int categoryId, boolean status, String description, String image) {
+        this.name = name;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.status = status;
+        this.description = description;
+        this.image = image;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -55,7 +64,7 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
