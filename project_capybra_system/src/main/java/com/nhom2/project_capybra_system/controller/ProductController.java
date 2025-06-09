@@ -29,10 +29,17 @@ public class ProductController extends HttpServlet {
             case "detail":
                 productDetail(req,resp);
                 break;
+            case "cart":
+                addToCart(req,resp);
+                break;
             default:
                 listProduct(req,resp);
                 break;
         }
+    }
+
+    private void addToCart(HttpServletRequest req, HttpServletResponse resp) {
+
     }
 
     private void productDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

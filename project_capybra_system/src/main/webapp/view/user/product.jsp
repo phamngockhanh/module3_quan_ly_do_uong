@@ -22,7 +22,8 @@
                 <form>
                     <!-- Search Input -->
                     <div class="mb-3">
-                        <input name="keyword" type="text" class="form-control" placeholder="Nhập tên đồ uống..." value="${keyword}">
+                        <input name="keyword" type="text" class="form-control" placeholder="Nhập tên đồ uống..."
+                               value="${keyword}">
                     </div>
 
                     <!-- Select Drink Type -->
@@ -50,28 +51,31 @@
             <div class="row g-4">
                 <!-- Card 1 -->
                 <c:forEach var="product" items="${products}">
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow-sm rounded-0">
-                            <img src="${product.image}"
-                                 class="card-img-top rounded-0"
-                                 style="width: 100%; height: 200px; object-fit: cover;">
-                            <div class="icons d-flex justify-content-center gap-2 my-2">
-                                <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
-                                        data-bs-toggle="offcanvas" data-bs-target="#cartSidebar"
-                                        aria-controls="cartSidebar">
-                                    <i class="bi bi-cart"></i>
-                                </button>
-                                <a href="product?action=detail&id=${product.id}" class="btn btn-md btn-outline-secondary">
-                                    <i class="bi bi-eye"></i>
-                                </a>
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm rounded-0">
+                                <img src="${product.image}"
+                                     class="card-img-top rounded-0"
+                                     style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="icons d-flex justify-content-center gap-2 my-2">
+                                    <form action="AddToCartServlet" method="post" style="display: inline;"></form>
+                                    <input type="hidden" name="productId" value="${product.id}">
+                                    <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
+                                            aria-controls="cartSidebar">
+                                        <i class="bi bi-cart"></i>
+                                    </button>
+                                    <a href="product?action=detail&id=${product.id}"
+                                       class="btn btn-md btn-outline-secondary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title" name="productName">${product.name}</h5>
+                                    <p class="card-text" name="description">${product.description}</p>
+                                    <p class="text-muted" name="price">${product.price}</p>
+                                </div>
                             </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title" name="productName">${product.name}</h5>
-                                <p class="card-text" name="description">${product.description}</p>
-                                <p class="text-muted" name="price">${product.price}</p>
-                            </div>
+
                         </div>
-                    </div>
                 </c:forEach>
             </div>
 
@@ -82,13 +86,15 @@
                     <input type="hidden" name="pageNumber" value="${currentPage - 1}"/>
                     <input type="hidden" name="categoryId" value="${selectedCategoryId}"/>
                     <input type="hidden" name="keyword" value="${keyword}"/>
-                    <button type="submit" class="btn btn-sm mx-1" style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == 1 ? 'disabled' : ''}>
+                    <button type="submit" class="btn btn-sm mx-1"
+                            style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == 1 ? 'disabled' : ''}>
                         Previous
                     </button>
                 </form>
 
                 <!-- Current page button -->
-                <button disabled class="btn btn-sm mx-1" style="background-color: #ffe0b3; color: #cc3300; border: none; font-weight: bold;">
+                <button disabled class="btn btn-sm mx-1"
+                        style="background-color: #ffe0b3; color: #cc3300; border: none; font-weight: bold;">
                     ${currentPage} / ${totalPages}
                 </button>
 
@@ -97,7 +103,8 @@
                     <input type="hidden" name="pageNumber" value="${currentPage + 1}"/>
                     <input type="hidden" name="categoryId" value="${selectedCategoryId}"/>
                     <input type="hidden" name="keyword" value="${keyword}"/>
-                    <button type="submit" class="btn btn-sm mx-1" style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == totalPages ? 'disabled' : ''}>
+                    <button type="submit" class="btn btn-sm mx-1"
+                            style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == totalPages ? 'disabled' : ''}>
                         Next
                     </button>
                 </form>
@@ -106,7 +113,6 @@
 
     </div>
 </div>
-
 <!-- Footer -->
 <jsp:include page="layout/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
