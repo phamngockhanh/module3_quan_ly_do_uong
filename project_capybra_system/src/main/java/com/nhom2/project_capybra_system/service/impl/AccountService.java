@@ -4,7 +4,6 @@ import com.nhom2.project_capybra_system.entity.Account;
 import com.nhom2.project_capybra_system.repository.IAccountRepository;
 import com.nhom2.project_capybra_system.repository.impl.AccountRepository;
 import com.nhom2.project_capybra_system.service.IAccountService;
-import com.nhom2.project_capybra_system.service.ICartService;
 import com.nhom2.project_capybra_system.util.PasswordEncodeUtil;
 
 import java.util.List;
@@ -48,5 +47,15 @@ public class AccountService implements IAccountService {
             return account;
         }
         return null;
+    }
+
+    @Override
+    public boolean disableAccountByUsername(String username) {
+        return repository.disableAccountByUsername(username);
+    }
+
+    @Override
+    public boolean unlockAccountByUsername(String username) {
+        return repository.unlockAccountByUsername(username);
     }
 }

@@ -5,4 +5,7 @@ import com.nhom2.project_capybra_system.entity.Account;
 public interface IAccountRepository extends IRepository<Account>{
     Account findByUsername(String username);
     void add(Account account);
+    boolean disableAccountByUsername(String username);
+
+    boolean unlockAccountByUsername(String username);
 }
