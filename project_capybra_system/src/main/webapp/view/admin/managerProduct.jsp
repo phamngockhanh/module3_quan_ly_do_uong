@@ -63,6 +63,7 @@
             <th scope="col">Status</th>
             <th scope="col">Description</th>
             <th scope="col">Image</th>
+            <th scope="col">Size</th>
             <th scope="col">Action</th>
 
         </tr>
@@ -77,6 +78,7 @@
             <td>${product.status}</td>
             <td>${product.description}</td>
             <td>${product.image}</td>
+            <td>${product.size}</td>
             <td>
                 <button onclick="deleteInfo(`${product.id}`,`${product.name}`)"
                         class="btn btn- btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">

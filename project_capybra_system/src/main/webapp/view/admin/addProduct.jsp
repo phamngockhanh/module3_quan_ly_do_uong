@@ -36,6 +36,10 @@
         <label for="formGroupExampleInput5" class="form-label">Image</label>
         <input name="image" required value="${product.image}" type="text" class="form-control" id="formGroupExampleInput5" placeholder="Image">
     </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput6" class="form-label">Size</label>
+        <input name="size" required value="${product.size}" type="text" class="form-control" id="formGroupExampleInput6" placeholder="Image">
+    </div>
     <div class="d-flex gap-2">
         <button type="submit" class="btn btn-warning btn-sm">Add product</button>
 

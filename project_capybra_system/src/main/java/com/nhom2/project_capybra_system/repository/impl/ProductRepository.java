@@ -174,17 +174,24 @@ public class ProductRepository implements IProductRepository {
 
         return false;
     }
-//    public boolean add(Product product) throws SQLException {
-//        String ADD="insert into products(name,price,category_id,status,description,image,size) value(?,?,?,?,?,?,?);";
-//        try(Connection connection=DatabaseUtil.getConnection();
-//        PreparedStatement preparedStatement= connection.prepareStatement(ADD);){
-//            preparedStatement.setString(1,product.getName());
-//            preparedStatement.setInt(2,product.getCategoryId());
-//            preparedStatement.setString(3,product.getStatus());
-//            preparedStatement.setString(4,product.getDescription());
-//            preparedStatement.setString(5,product.getImage());
-//        }
-//    }
+    public boolean add(Product product) throws SQLException {
+        String ADD="insert into products(name,price,category_id,status,description,image,size) value(?,?,?,?,?,?,?);";
+        try(Connection connection=DatabaseUtil.getConnection();
+        PreparedStatement preparedStatement= connection.prepareStatement(ADD);){
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setInt(2,product.getCategoryId());
+            preparedStatement.setBoolean(3,product.getStatus());
+            preparedStatement.setString(4,product.getDescription());
+            preparedStatement.setString(5,product.getImage());
+            preparedStatement.setString(6,product.getSize());
+            int effectRow= preparedStatement.executeUpdate();
+            return effectRow==1;
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+
+        return false;
+    }
 
 
 

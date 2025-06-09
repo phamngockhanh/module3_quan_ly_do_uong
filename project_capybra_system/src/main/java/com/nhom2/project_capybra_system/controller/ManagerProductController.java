@@ -72,7 +72,8 @@ public class ManagerProductController extends HttpServlet {
         boolean status= Boolean.parseBoolean(req.getParameter("status"));
         String description=req.getParameter("description");
         String image=req.getParameter("image");
-        Product product= new Product(name,price,categoryId,status,description,image);
+        String size=req.getParameter("size");
+        Product product= new Product(name,price,categoryId,status,description,image,size);
         req.setAttribute("product",product);
         resp.sendRedirect("/managerProduct?mess=add success");
 
