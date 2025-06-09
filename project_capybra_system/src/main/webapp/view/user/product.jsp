@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ngock
-  Date: 04/06/2025
-  Time: 11:42 am
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
@@ -14,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./assets/user/css/product_style.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!--Navbar-->
 <jsp:include page="layout/navbar_none_bg.jsp"/>
 <%--Display Product--%>
@@ -24,66 +18,61 @@
         <!-- Filter Sidebar -->
         <div class="col-md-3 mb-4">
             <div class="border p-3 rounded-0 shadow-sm">
-                <h5>Bộ lọc</h5>
+                <h5>Tìm kiếm sản phẩm</h5>
                 <form>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="tra-sua" id="filter1">
-                        <label class="form-check-label" for="filter1">Trà Sữa</label>
+                    <!-- Search Input -->
+                    <div class="mb-3">
+                        <input name="productName" type="text" class="form-control" placeholder="Nhập tên đồ uống..." id="searchInput">
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="ca-phe" id="filter2">
-                        <label class="form-check-label" for="filter2">Cà Phê</label>
+
+                    <!-- Select Drink Type -->
+                    <div class="mb-3">
+                        <label for="drinkType" class="form-label">Chọn loại đồ uống</label>
+                        <select class="form-select" id="drinkType">
+                            <option value="0">Tất cả</option>
+                            <c:forEach var="category" items="${categories}">
+                                <option value="${category.id}"
+                                        <c:if test="${category.id==selectedCategoryId}">selected</c:if>>${category.name}</option>
+                            </c:forEach>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="sinh-to" id="filter3">
-                        <label class="form-check-label" for="filter3">Sinh Tố</label>
-                    </div>
-                </form>
-                <h5>Giá sản phẩm</h5>
-                <form>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="tra-sua" id="filter4">
-                        <label class="form-check-label" for="filter1">Trà Sữa</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="ca-phe" id="filter5">
-                        <label class="form-check-label" for="filter2">Cà Phê</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="sinh-to" id="filter6">
-                        <label class="form-check-label" for="filter3">Sinh Tố</label>
-                    </div>
-                    <button type="button" class="btn btn-warning mt-3 w-100 rounded-0">Áp dụng</button>
+
+                    <!-- Search Button -->
+                    <button type="button" class="btn btn-warning w-100 rounded-0">Tìm kiếm</button>
                 </form>
             </div>
         </div>
+
 
         <!-- Drink Cards -->
         <div class="col-md-9">
             <div class="row g-4">
 
                 <!-- Card 1 -->
+                <c:forEach var="product" items="${products}">
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm rounded-0">
-                        <img src="https://culacstudio.com/wp-content/uploads/2021/08/NG_1164-2-scaled-1.jpg"
+                        <img src="${product.image}"
                              class="card-img-top rounded-0"
-                             alt="Cà Phê Sữa Đá"
                              style="width: 100%; height: 200px; object-fit: cover;">
                         <div class="icons d-flex justify-content-center gap-2 my-2">
-                            <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar">
+                            <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
+                                    data-bs-toggle="offcanvas" data-bs-target="#cartSidebar"
+                                    aria-controls="cartSidebar">
                                 <i class="bi bi-cart"></i>
                             </button>
-                            <a href="#" class="btn btn-md btn-outline-secondary">
+                            <a href="product?action=detail&id=${product.id}" class="btn btn-md btn-outline-secondary">
                                 <i class="bi bi-eye"></i>
                             </a>
                         </div>
                         <div class="card-body text-center">
-                            <h5 class="card-title">Cà Phê Sữa Đá</h5>
-                            <p class="card-text">Đậm đà truyền thống, hương vị Việt.</p>
-                            <p class="text-muted">45,000 VND</p>
+                            <h5 class="card-title" name="productName">${product.name}</h5>
+                            <p class="card-text" name="description">${product.description}</p>
+                            <p class="text-muted" name="price">${product.price}</p>
                         </div>
                     </div>
                 </div>
+                </c:forEach>
 
             </div>
         </div>

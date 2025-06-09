@@ -16,7 +16,8 @@ public class OrderStatusService implements IOrderStatusService {
     }
 
     @Override
-    public OrderStatus findById(Integer id) {
+    public OrderStatus findById(int id) {
         return null;
     }
+
 }
