@@ -2,10 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <c:set var="adminAssetsPath" value="${basePath}/assets/admin"/>
-<c:import url="/view/common/confirm-modal.jsp">
-    <c:param name="actionUrl" value="" />
-    <c:param name="confirmMessage" value="" />
-</c:import>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,9 +64,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <form class="d-flex justify-content-end" action="/admin/user-management"  method="post">
-                                            <input type="hidden" value="${user.accountId}" name="accountId">
-                                            <button class="btn-danger btn ">Khóa tài khoản</button>
+                                        <form class="d-flex justify-content-end">
+<%--                                            <input type="hidden" value="${user.accountId}" name="accountId">--%>
+                                            <button type="button" class="btn-danger btn "
+                                                    onclick="deleteInfo(${user.accountId}, ${user.username})">Khóa tài khoản</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -84,6 +81,27 @@
     </div>
 </div>
 
+//Modal
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post" action="/admin/user-management">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input hidden="hidden" id="deleteId" name="deleteId">
+                    <span>Bạn có muốn xóa tài khoản </span><span id="deleteName"></span> không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button  class="btn btn-primary">Xoá</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 //Modal onclick
 <script>
     function deleteInfo(id, name) {

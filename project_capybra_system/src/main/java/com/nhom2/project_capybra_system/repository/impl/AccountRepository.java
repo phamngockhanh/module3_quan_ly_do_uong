@@ -23,6 +23,11 @@ public class AccountRepository implements IAccountRepository {
 
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public Account findByUsername(String username) {
         String sql = "select * from accounts where username = ?";
 

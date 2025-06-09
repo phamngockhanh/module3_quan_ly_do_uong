@@ -16,4 +16,10 @@ public class CartDetailRepository implements ICartDetailRepository {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+
 }

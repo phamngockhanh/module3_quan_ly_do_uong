@@ -16,5 +16,8 @@ public class OrderRepository implements IOrderRepository {
         return null;
     }
 
-
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }

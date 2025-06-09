@@ -3,10 +3,7 @@
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 <c:set var="adminAssetsPath" value="${basePath}/assets/admin" />
 
-<%
-    String actionUrl = request.getParameter("actionUrl");
-    String confirmMessage = request.getParameter("confirmMessage");
-%>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

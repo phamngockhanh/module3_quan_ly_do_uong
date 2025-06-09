@@ -20,4 +20,8 @@ public class RoleService implements IRoleService {
         return null;
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
 }
