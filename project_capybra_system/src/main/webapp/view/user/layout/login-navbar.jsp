@@ -47,22 +47,18 @@
                 <i class="bi bi-cart" style="font-size: 1.25rem;"></i>
             </a>
 
-            <a class="nav-link d-flex align-items-center justify-content-center user-icon"
-               style="width: 40px; height: 40px;"
-               href="#"
-               data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Xin chào ${fullname}
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-            </a>
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle d-flex align-items-center " href="#" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    Xin chào ${fullname}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="/logout">Đăng xuất</a></li>
+                </ul>
+            </div>
         </div>
 
     </nav>
