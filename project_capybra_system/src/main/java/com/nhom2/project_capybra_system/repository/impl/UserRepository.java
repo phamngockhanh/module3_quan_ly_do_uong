@@ -16,6 +16,10 @@ public class UserRepository implements IUserRepository {
     private static final String FIND_ALL_USER_ACCOUNT =
             " select u.*, a.username, a.status as account_status, a.password, a.role_id " +
                     "from users u inner join accounts a on u.account_id = a.id where a.role_id = 1;";
+
+    private static final String FIND_ALL_USER_ACCOUNT_BY_USER_ID =
+            " select u.*, a.username, a.status as account_status, a.password, a.role_id " +
+                    "from users u inner join accounts a on u.account_id = a.id where a.role_id = 1 and u.id = ?;";
     @Override
     public List<User> findAll() {
         return null;
@@ -83,5 +87,31 @@ public class UserRepository implements IUserRepository {
 
 
         return userDtoList;
+    }
+
+    @Override
+    public UserDto findUserAndAccountByUserId(int id) {
+        try (Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(FIND_ALL_USER_ACCOUNT_BY_USER_ID)){
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                UserDto userDto = new UserDto();
+
+                userDto.setUserId(resultSet.getInt("id"));
+                userDto.setName(resultSet.getString("name"));
+                userDto.setEmail(resultSet.getString("email"));
+                userDto.setAddress(resultSet.getString("address"));
+                userDto.setPhone(resultSet.getString("phone"));
+                userDto.setAccountId(resultSet.getInt("account_id"));
+                userDto.setUsername(resultSet.getString("username"));
+                userDto.setRoleId(resultSet.getInt("role_id"));
+                userDto.setAccountStatus(resultSet.getBoolean("account_status"));
+                return userDto;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
