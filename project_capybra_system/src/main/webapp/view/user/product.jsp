@@ -12,7 +12,7 @@
 <!--Navbar-->
 <jsp:include page="layout/navbar_none_bg.jsp"/>
 <%--Display Product--%>
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh;">
     <div class="row">
 
         <!-- Filter Sidebar -->
@@ -22,13 +22,13 @@
                 <form>
                     <!-- Search Input -->
                     <div class="mb-3">
-                        <input name="productName" type="text" class="form-control" placeholder="Nhập tên đồ uống..." id="searchInput">
+                        <input name="keyword" type="text" class="form-control" placeholder="Nhập tên đồ uống..." value="${keyword}">
                     </div>
 
                     <!-- Select Drink Type -->
                     <div class="mb-3">
                         <label for="drinkType" class="form-label">Chọn loại đồ uống</label>
-                        <select class="form-select" id="drinkType">
+                        <select class="form-select" id="drinkType" name="categoryId">
                             <option value="0">Tất cả</option>
                             <c:forEach var="category" items="${categories}">
                                 <option value="${category.id}"
@@ -38,7 +38,8 @@
                     </div>
 
                     <!-- Search Button -->
-                    <button type="button" class="btn btn-warning w-100 rounded-0">Tìm kiếm</button>
+                    <input type="hidden" name="action" value="filter">
+                    <button type="submit" class="btn btn-warning w-100 rounded-0">Tìm kiếm</button>
                 </form>
             </div>
         </div>
@@ -47,38 +48,65 @@
         <!-- Drink Cards -->
         <div class="col-md-9">
             <div class="row g-4">
-
                 <!-- Card 1 -->
                 <c:forEach var="product" items="${products}">
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm rounded-0">
-                        <img src="${product.image}"
-                             class="card-img-top rounded-0"
-                             style="width: 100%; height: 200px; object-fit: cover;">
-                        <div class="icons d-flex justify-content-center gap-2 my-2">
-                            <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
-                                    data-bs-toggle="offcanvas" data-bs-target="#cartSidebar"
-                                    aria-controls="cartSidebar">
-                                <i class="bi bi-cart"></i>
-                            </button>
-                            <a href="product?action=detail&id=${product.id}" class="btn btn-md btn-outline-secondary">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="card-title" name="productName">${product.name}</h5>
-                            <p class="card-text" name="description">${product.description}</p>
-                            <p class="text-muted" name="price">${product.price}</p>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm rounded-0">
+                            <img src="${product.image}"
+                                 class="card-img-top rounded-0"
+                                 style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="icons d-flex justify-content-center gap-2 my-2">
+                                <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
+                                        data-bs-toggle="offcanvas" data-bs-target="#cartSidebar"
+                                        aria-controls="cartSidebar">
+                                    <i class="bi bi-cart"></i>
+                                </button>
+                                <a href="product?action=detail&id=${product.id}" class="btn btn-md btn-outline-secondary">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title" name="productName">${product.name}</h5>
+                                <p class="card-text" name="description">${product.description}</p>
+                                <p class="text-muted" name="price">${product.price}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </c:forEach>
+            </div>
 
+            <!-- Pagination (nằm giữa khối card) -->
+            <div class="d-flex justify-content-center my-4">
+                <!-- Previous button -->
+                <form action="product" method="get" style="display:inline;">
+                    <input type="hidden" name="pageNumber" value="${currentPage - 1}"/>
+                    <input type="hidden" name="categoryId" value="${selectedCategoryId}"/>
+                    <input type="hidden" name="keyword" value="${keyword}"/>
+                    <button type="submit" class="btn btn-sm mx-1" style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == 1 ? 'disabled' : ''}>
+                        Previous
+                    </button>
+                </form>
+
+                <!-- Current page button -->
+                <button disabled class="btn btn-sm mx-1" style="background-color: #ffe0b3; color: #cc3300; border: none; font-weight: bold;">
+                    ${currentPage} / ${totalPages}
+                </button>
+
+                <!-- Next button -->
+                <form action="product" method="get" style="display:inline;">
+                    <input type="hidden" name="pageNumber" value="${currentPage + 1}"/>
+                    <input type="hidden" name="categoryId" value="${selectedCategoryId}"/>
+                    <input type="hidden" name="keyword" value="${keyword}"/>
+                    <button type="submit" class="btn btn-sm mx-1" style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == totalPages ? 'disabled' : ''}>
+                        Next
+                    </button>
+                </form>
             </div>
         </div>
 
     </div>
 </div>
+
 <!-- Footer -->
 <jsp:include page="layout/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>

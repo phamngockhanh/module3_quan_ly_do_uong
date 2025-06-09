@@ -112,7 +112,7 @@ public class ProductRepository implements IProductRepository {
             preparedStatement.setInt(5,offset);
             preparedStatement.setInt(6,pageSize);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            while(resultSet.next()){
                 Product product = new Product();
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
@@ -137,9 +137,9 @@ public class ProductRepository implements IProductRepository {
         try(Connection connection = DatabaseUtil.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_PAGINATION)){
             preparedStatement.setInt(1,pageSize);
-            preparedStatement.setInt(1,offset);
+            preparedStatement.setInt(2,offset);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            while(resultSet.next()){
                 Product product  = new Product();
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
