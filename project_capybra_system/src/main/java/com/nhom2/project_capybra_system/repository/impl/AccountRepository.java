@@ -17,9 +17,10 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public Account findById(Integer id) {
+    public Account findById(int id) {
         return null;
     }
+
 
     @Override
     public Account findByUsername(String username) {

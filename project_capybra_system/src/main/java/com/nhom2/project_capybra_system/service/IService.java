@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IService <T>{
     List<T> findAll();
-    T findById(Integer id);
+    T findById(int id);
 }

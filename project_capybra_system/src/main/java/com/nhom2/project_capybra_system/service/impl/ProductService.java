@@ -16,7 +16,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product findById(Integer id) {
-        return null;
+    public Product findById(int id) {
+        return repository.findById(id);
     }
 }

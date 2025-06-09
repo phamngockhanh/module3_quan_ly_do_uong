@@ -12,7 +12,8 @@ public class CartDetailRepository implements ICartDetailRepository {
     }
 
     @Override
-    public CartDetail findById(Integer id) {
+    public CartDetail findById(int id) {
         return null;
     }
+
 }

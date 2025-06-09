@@ -21,9 +21,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User findById(Integer id) {
+    public User findById(int id) {
         return null;
     }
+
 
     @Override
     public void addUserWithAccount(String username, String name, String phone, String address, String email) {

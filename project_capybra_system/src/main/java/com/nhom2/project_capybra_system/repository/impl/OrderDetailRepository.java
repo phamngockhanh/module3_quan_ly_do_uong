@@ -12,7 +12,8 @@ public class OrderDetailRepository implements IOrderDetailRepository {
     }
 
     @Override
-    public OrderDetail findById(Integer id) {
+    public OrderDetail findById(int id) {
         return null;
     }
+
 }
