@@ -64,7 +64,7 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
