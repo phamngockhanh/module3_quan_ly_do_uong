@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AccountRepository implements IAccountRepository {
+
+    private static final String DISABLE_ACCOUNT_BY_USERNAME = "update accounts set status = 0 where username = ?";
+    private static final String UNLOCK_ACCOUNT_BY_USERNAME = "update accounts set status = 1 where username = ?";
     @Override
     public List<Account> findAll() {
         return null;
@@ -68,6 +71,32 @@ public class AccountRepository implements IAccountRepository {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean disableAccountByUsername(String username) {
+        try (Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(DISABLE_ACCOUNT_BY_USERNAME)){
+            statement.setString(1, username);
+            int updatedRow = statement.executeUpdate();
+            return updatedRow == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean unlockAccountByUsername(String username) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UNLOCK_ACCOUNT_BY_USERNAME)){
+            statement.setString(1, username);
+            int updatedRow = statement.executeUpdate();
+            return updatedRow == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

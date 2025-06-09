@@ -8,4 +8,8 @@ public interface IAccountService extends IService<Account> {
     void add(Account account);
 
     Account checkLogin(String username, String password);
+
+    boolean disableAccountByUsername(String username);
+
+    boolean unlockAccountByUsername(String username);
 }
