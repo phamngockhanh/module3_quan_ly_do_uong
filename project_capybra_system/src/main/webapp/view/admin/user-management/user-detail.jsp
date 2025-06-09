@@ -64,11 +64,21 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <form class="d-flex justify-content-end">
-<%--                                            <input type="hidden" value="${user.accountId}" name="accountId">--%>
-                                            <button type="button" class="btn-danger btn "
-                                                    onclick="deleteInfo(${user.accountId}, ${user.username})">Khóa tài khoản</button>
-                                        </form>
+                                        <div class="d-flex justify-content-end">
+                                            <c:if test="${user.accountStatus == true}">
+                                                <button type="button" class="btn-danger btn" onclick="deleteInfo('${user.username}', '${user.username}')"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">Khóa tài khoản</button>
+                                            </c:if>
+                                            <c:if test="${user.accountStatus == false}">
+                                                <form action="/admin/user-management" method="post">
+                                                    <input type="hidden" name="action" value="unblock">
+                                                    <input type="hidden" value="${user.userId}" name="userId">
+                                                    <input type="hidden" name="username" value="${user.username}">
+                                                    <button class="btn-success btn">Mở khóa tài khoản</button>
+                                                </form>
+
+                                            </c:if>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -85,18 +95,20 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form method="post" action="/admin/user-management">
+            <input type="hidden" name="action" value="block">
+            <input type="hidden" value="${user.userId}" name="userId">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input hidden="hidden" id="deleteId" name="deleteId">
-                    <span>Bạn có muốn xóa tài khoản </span><span id="deleteName"></span> không?
+                    <input hidden="hidden" id="deleteId" name="username">
+                    <span>Bạn có muốn khóa tài khoản </span><span id="deleteName"></span> không?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                    <button  class="btn btn-primary">Xoá</button>
+                    <button class="btn btn-primary">Khóa</button>
                 </div>
             </div>
         </form>

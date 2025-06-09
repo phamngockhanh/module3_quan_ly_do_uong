@@ -1,7 +1,10 @@
 package com.nhom2.project_capybra_system.controller.admin;
 
 import com.nhom2.project_capybra_system.dto.UserDto;
+import com.nhom2.project_capybra_system.entity.Account;
+import com.nhom2.project_capybra_system.service.IAccountService;
 import com.nhom2.project_capybra_system.service.IUserService;
+import com.nhom2.project_capybra_system.service.impl.AccountService;
 import com.nhom2.project_capybra_system.service.impl.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,11 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/admin/user-management")
 public class UserManagement extends HttpServlet {
     private IUserService userService = new UserService();
+    private IAccountService accountService = new AccountService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,9 +39,20 @@ public class UserManagement extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String accountIdStr = req.getParameter("accountId");
-        if(accountIdStr != null){
-
+        String username = req.getParameter("username");
+        String userId = req.getParameter("userId");
+        String action = req.getParameter("action");
+        if (action.equals("block")) {
+            if (username != null) {
+                accountService.disableAccountByUsername(username);
+                resp.sendRedirect("/admin/user-management?userId=" + userId);
+            }
+        } else if (action.equals("unblock")) {
+            accountService.unlockAccountByUsername(username);
+            resp.sendRedirect("/admin/user-management?userId=" + userId);
+        } else {
+            resp.sendRedirect("/admin/user-management");
         }
+
     }
 }
