@@ -36,7 +36,7 @@ public class ProductRepository implements IProductRepository {
                 product.setStatus(resultSet.getBoolean("status"));
                 product.setDescription(resultSet.getString("description"));
                 product.setImage(resultSet.getString("image"));
-
+                product.setSize(resultSet.getString("size"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class ProductRepository implements IProductRepository {
             preparedStatement.setInt(5,offset);
             preparedStatement.setInt(6,pageSize);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            if(resultSet.next()){
                 Product product = new Product();
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
@@ -137,9 +137,9 @@ public class ProductRepository implements IProductRepository {
         try(Connection connection = DatabaseUtil.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_PAGINATION)){
             preparedStatement.setInt(1,pageSize);
-            preparedStatement.setInt(2,offset);
+            preparedStatement.setInt(1,offset);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            if(resultSet.next()){
                 Product product  = new Product();
                 product.setId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
@@ -186,6 +186,40 @@ public class ProductRepository implements IProductRepository {
 //        }
 //    }
 
+    public boolean add(Product product) {
+        String ADD = "insert into products(name,price,category_id,status,description,image,size) value(?,?,?,?,?,?,?);";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD);) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getCategoryId());
+            preparedStatement.setBoolean(4, product.getStatus());
+            preparedStatement.setString(5, product.getDescription());
+            preparedStatement.setString(6, product.getImage());
+            preparedStatement.setString(7, product.getSize());
+            int effectRow = preparedStatement.executeUpdate();
+            return effectRow == 1;
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
 
+        return false;
+    }
 
+    public boolean update(Product product) {
+        String UPDATE = "update products set name=?,price=?,category_id=?,status=? where id=?;";
+        try(Connection connection =DatabaseUtil.getConnection();
+        PreparedStatement preparedStatement= connection.prepareStatement(UPDATE);) {
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setDouble(2,product.getPrice());
+            preparedStatement.setInt(3,product.getCategoryId());
+            preparedStatement.setBoolean(4,product.getStatus());
+            preparedStatement.setInt(5,product.getId());
+            int effectRow= preparedStatement.executeUpdate();
+            return effectRow==1;
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+        return false;
+    }
 }

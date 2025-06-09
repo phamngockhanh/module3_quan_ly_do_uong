@@ -44,4 +44,13 @@ public class ProductService implements IProductService {
     public boolean delete(int id) {
         return  repository.delete(id);
     }
+
+    @Override
+    public boolean add(Product product) {
+        return repository.add(product);
+    }
+ public boolean update(Product product){
+        return repository.update(product);
+
+    }
 }

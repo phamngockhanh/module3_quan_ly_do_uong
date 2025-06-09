@@ -23,14 +23,25 @@ public class Product {
         this.size = size;
     }
 
-    public Product(String name, long price, int categoryId, boolean status, String description, String image) {
+    public Product(String name, long price, int categoryId, boolean status, String description, String image, String size) {
         this.name = name;
         this.price = price;
         this.categoryId = categoryId;
         this.status = status;
         this.description = description;
         this.image = image;
+        this.size = size;
     }
+
+    public Product(Integer id,String name, long price, int categoryId, boolean status) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.status = status;
+    }
+
+
 
     public Integer getId() {
         return id;
