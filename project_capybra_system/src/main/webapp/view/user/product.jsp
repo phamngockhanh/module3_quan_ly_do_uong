@@ -51,31 +51,32 @@
             <div class="row g-4">
                 <!-- Card 1 -->
                 <c:forEach var="product" items="${products}">
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm rounded-0">
-                                <img src="${product.image}"
-                                     class="card-img-top rounded-0"
-                                     style="width: 100%; height: 200px; object-fit: cover;">
-                                <div class="icons d-flex justify-content-center gap-2 my-2">
-                                    <form action="AddToCartServlet" method="post" style="display: inline;"></form>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm rounded-0">
+                            <img src="${product.image}"
+                                 class="card-img-top rounded-0"
+                                 style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="icons d-flex justify-content-center gap-2 my-2">
+                                <form action="AddToCartServlet" method="post" style="display: inline;">
                                     <input type="hidden" name="productId" value="${product.id}">
-                                    <button class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
-                                            aria-controls="cartSidebar">
+                                    <button type="submit" class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
+                                            data-product-id="${product.id}"  aria-controls="cartSidebar">
                                         <i class="bi bi-cart"></i>
                                     </button>
                                     <a href="product?action=detail&id=${product.id}"
                                        class="btn btn-md btn-outline-secondary">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title" name="productName">${product.name}</h5>
-                                    <p class="card-text" name="description">${product.description}</p>
-                                    <p class="text-muted" name="price">${product.price}</p>
-                                </div>
+                                </form>
                             </div>
-
+                            <div class="card-body text-center">
+                                <h5 class="card-title" name="productName">${product.name}</h5>
+                                <p class="card-text" name="description">${product.description}</p>
+                                <p class="text-muted" name="price">${product.price} <b>VNĐ</b></p>
+                            </div>
                         </div>
+
+                    </div>
                 </c:forEach>
             </div>
 
@@ -115,6 +116,39 @@
 </div>
 <!-- Footer -->
 <jsp:include page="layout/footer.jsp"/>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.add-to-cart-btn');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const productId = this.getAttribute('data-product-id');
+
+                fetch('AddToCartServlet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'productId=' + encodeURIComponent(productId)
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data); // Hiện thông báo hoặc cập nhật UI giỏ hàng
+                        Swal.fire({
+                            title: 'Thành công!',
+                            text: 'Đã thêm sản phẩm vào giỏ hàng.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

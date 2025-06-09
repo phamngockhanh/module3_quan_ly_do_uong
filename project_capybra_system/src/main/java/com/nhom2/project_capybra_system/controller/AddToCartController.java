@@ -17,6 +17,7 @@ public class AddToCartController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productIdStr = req.getParameter("productId");
         if(productIdStr == null){
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.getWriter().write("Missing productId");
             return;
         }
@@ -34,6 +35,7 @@ public class AddToCartController extends HttpServlet {
 
         session.setAttribute("cart", cart);
 
-        resp.sendRedirect("cart.jsp");
+        resp.setContentType("text/plain");
+        resp.getWriter().write("Product added to cart");
     }
 }
