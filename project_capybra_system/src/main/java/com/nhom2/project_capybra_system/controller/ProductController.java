@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name="ProductController" , urlPatterns="/product")
@@ -30,10 +29,17 @@ public class ProductController extends HttpServlet {
             case "detail":
                 productDetail(req,resp);
                 break;
+            case "cart":
+                addToCart(req,resp);
+                break;
             default:
                 listProduct(req,resp);
                 break;
         }
+    }
+
+    private void addToCart(HttpServletRequest req, HttpServletResponse resp) {
+
     }
 
     private void productDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,8 +52,60 @@ public class ProductController extends HttpServlet {
     }
 
     private void listProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> products = productService.findAll();
-        req.setAttribute("products",products);
+        int pageNumber = 1;
+        int pageSize = 9;
+        String pageParam = req.getParameter("pageNumber");
+        String categoryParam = req.getParameter("categoryId");
+        String keyword =req.getParameter("keyword") != null? req.getParameter("keyword").trim() : "";
+        int categoryId = 0;
+        if(categoryParam != null && !categoryParam.isEmpty()){
+            try{
+                categoryId = Integer.parseInt(categoryParam);
+            }catch (NumberFormatException ex){
+                categoryId = 0;
+            }
+        }
+        int totalProducts;
+        if (categoryId == 0 && keyword.isEmpty()) {
+            totalProducts = productService.countProduct();
+        } else {
+            totalProducts = productService.countProductWithFilter(keyword, categoryId);
+        }
+
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+
+        if (totalPages == 0) {
+            totalPages = 1;
+        }
+        if (pageParam != null) {
+            try {
+                pageNumber = Integer.parseInt(pageParam);
+                if (pageNumber > totalPages) {
+                    pageNumber = 1;
+                }
+            } catch (NumberFormatException e) {
+                pageNumber = 1;
+            }
+        }
+
+        List<Category> categories = categoryService.findAll();
+        req.setAttribute("categories", categories);
+
+        int offset = (pageNumber - 1) * pageSize;
+        List<Product> products;
+        if (categoryId == 0 && keyword.isEmpty()) {
+            products = productService.findAllNoneFilter(offset, pageSize);
+        } else {
+            products = productService.findAllWithPagination(keyword, categoryId, offset, pageSize);
+        }
+
+        req.setAttribute("products", products);
+        req.setAttribute("currentPage", pageNumber);
+        req.setAttribute("pageSize", pageSize);
+        req.setAttribute("totalPages", totalPages);
+        req.setAttribute("selectedCategoryId", categoryId);
+        req.setAttribute("keyword", keyword);
+
         req.getRequestDispatcher("view/user/product.jsp").forward(req,resp);
     }
 
