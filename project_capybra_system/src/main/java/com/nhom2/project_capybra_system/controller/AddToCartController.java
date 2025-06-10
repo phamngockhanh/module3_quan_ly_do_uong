@@ -52,6 +52,7 @@ public class AddToCartController extends HttpServlet {
             }
 
         } else {
+            // Chưa login → thêm vào session cart
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
 
             if (cart == null) {

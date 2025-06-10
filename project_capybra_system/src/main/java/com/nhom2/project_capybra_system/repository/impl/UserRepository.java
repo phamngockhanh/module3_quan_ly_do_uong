@@ -152,4 +152,63 @@ public class UserRepository implements IUserRepository {
         }
         return null;
     }
+
+    @Override
+    public User findByUsername(String username) {
+        try(Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME)) {
+
+            statement.setString(1, username);
+            ResultSet resultSet =  statement.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setAccountId(resultSet.getInt("account_id"));
+                user.setAddress(resultSet.getString("address"));
+                user.setEmail(resultSet.getString("email"));
+                user.setName(resultSet.getString("name"));
+                user.setId(resultSet.getInt("id"));
+                user.setStatus(resultSet.getBoolean("status"));
+
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        try(Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_USER)){
+
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getAddress());
+            statement.setString(3, user.getPhone());
+            statement.setString(4, user.getEmail());
+            statement.setInt(5, user.getId());
+
+            int affectedRow = statement.executeUpdate();
+            return affectedRow == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public int getUserId(int accountId) {
+        int userId= -1;
+        try(Connection connection = DatabaseUtil.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_ID)){
+            preparedStatement.setInt(1,accountId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                userId = resultSet.getInt("id");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userId;
+    }
 }
