@@ -13,9 +13,20 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(value = "/login")
+@WebServlet(urlPatterns = {"/login", "/logout"})
 public class LoginController extends HttpServlet {
     private IAccountService accountService = new AccountService();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getServletPath();
+
+        if("/logout".equals(action)){
+            SessionUtil.remove(req, "account");
+            resp.sendRedirect("/");
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
