@@ -11,4 +11,5 @@ public interface IProductRepository extends IRepository<Product> {
     List<Product> findAllNoneFilter(int offset, int pageSize);
     boolean add(Product product);
     boolean update(Product product);
+    List<Product> search(String name, Integer id);
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LENOVO
@@ -16,21 +17,38 @@
 <form method="post">
     <div class="mb-3">
         <label for="formGroupExampleInput0" class="form-label">Name</label>
-        <input name="name" required value="${product.name}" type="text" class="form-control" id="formGroupExampleInput0" placeholder="Name">
+        <input name="name" required value="${product.name}" type="text" class="form-control" id="formGroupExampleInput0"
+               placeholder="Name">
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Price</label>
-        <input name="price" required value="${product.price}" type="text" class="form-control" id="formGroupExampleInput" placeholder="Price">
+        <input name="price" required value="${product.price}" type="text" class="form-control"
+               id="formGroupExampleInput" placeholder="Price">
     </div>
     <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">CategoryId</label>
-        <input name="categoryId" required value="${product.categoryId}" type="text" class="form-control" id="formGroupExampleInput2" placeholder="CategoryId">
-    </div>
-    <div class="mb-3">
-        <label for="formGroupExampleInput3" class="form-label">Status</label>
-        <input name="status" required value="${product.status}" type="text" class="form-control" id="formGroupExampleInput3" placeholder="Statucs">
-    </div>
+        <label class="form-label">Category</label>
+        <select name="categoryId">
+            <option>Name</option>
+            <c:forEach var="category" items="${categories}">
+                <option value="${category.id}">${category.name}</option>
+            </c:forEach>
+        </select>
 
+        <%--        <label for="formGroupExampleInput2" class="form-label">CategoryId</label>--%>
+        <%--        <input name="categoryId" required value="${product.categoryId}" type="text" class="form-control" id="formGroupExampleInput2" placeholder="CategoryId">--%>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select name="status" class="form-control" id="formGroupExampleInput3" required>
+            <option value="true" ${product.status == 'true' ? 'selected' : ''}>True</option>
+            <option value="false" ${product.status == 'false' ? 'selected' : ''}>False</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput4" class="form-label">Image</label>
+        <input name="image" required value="${product.image}" type="text" class="form-control"
+               id="formGroupExampleInput4" placeholder="Image">
+    </div>
     <div class="d-flex gap-2">
         <button type="submit" class="btn btn-warning btn-sm">Add product</button>
 

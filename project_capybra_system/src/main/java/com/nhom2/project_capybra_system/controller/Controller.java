@@ -14,17 +14,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-
-import static java.nio.file.Files.delete;
-
-
-@WebServlet(value = "/managerProduct")
-public class ManagerProductController extends HttpServlet {
+@WebServlet(urlPatterns ="/managerProduct")
+public class Controller extends HttpServlet {
     private ICategoryService iCategoryService = new CategoryService();
     private List<Category> categories = iCategoryService.findAll();
     private IProductService productService = new ProductService();
 
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action == null) {
@@ -39,27 +34,50 @@ public class ManagerProductController extends HttpServlet {
                 break;
             case "delete":
                 break;
+            case "search":
+                search(req, resp);
+                break;
             default:
                 List<Product> productList = productService.findAll();
                 req.setAttribute("productList", productList);
-                req.setAttribute("category", categories);
+                req.setAttribute("categories", categories);
                 req.getRequestDispatcher("/view/admin/managerProduct.jsp").forward(req, resp);
         }
 
 
     }
 
+    private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        String categoryIdRaw = req.getParameter("categoryId");
+
+        Integer categoryId = null;
+        if (categoryId != null && !categoryIdRaw.isEmpty()) {
+            try {
+                categoryId = Integer.parseInt(categoryIdRaw);
+            } catch (NumberFormatException e) {
+                System.out.println("không tìm thấy sản phẩm");
+            }
+        }
+        List<Product> productList = productService.search(name, categoryId);
+        List<Category> categories = iCategoryService.findAll();
+
+        req.setAttribute("productList", productList);
+        req.setAttribute("categories", categories);
+        req.getRequestDispatcher("/view/admin/managerProduct.jsp").forward(req, resp);    }
+
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Product product = productService.findById(id);
+        req.setAttribute("categories", categories);
         req.setAttribute("product", product);
         req.getRequestDispatcher("/view/admin/updateProduct.jsp").forward(req, resp);
     }
 
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("categories", categories);
         req.getRequestDispatcher("/view/admin/addProduct.jsp").forward(req, resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -80,14 +98,14 @@ public class ManagerProductController extends HttpServlet {
 
         }
     }
-
     private void updateProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = Integer.valueOf(req.getParameter("id"));
         String name = req.getParameter("name");
         long price = Long.parseLong(req.getParameter("price"));
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
         boolean status = Boolean.parseBoolean(req.getParameter("status"));
-        Product product = new Product(id,name, price, categoryId, status);
+        String image=req.getParameter("image");
+        Product product = new Product(id,name, price, categoryId, status,image);
         productService.update(product);
         resp.sendRedirect("/managerProduct?mess=update success");
     }
@@ -113,4 +131,10 @@ public class ManagerProductController extends HttpServlet {
         resp.sendRedirect("managerProduct?mess=delete success");
     }
 
+
+
 }
+
+
+
+
