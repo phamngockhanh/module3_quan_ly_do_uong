@@ -24,6 +24,12 @@ public class UserRepository implements IUserRepository {
     private static final String FIND_ALL_USER_ACCOUNT_BY_ACCOUNT_ID =
             " select u.*, a.username, a.status as account_status, a.password, a.role_id " +
                     "from users u inner join accounts a on u.account_id = a.id where a.id = ?;";
+
+    private static final String FIND_BY_USERNAME =
+            "select u.* from users u inner join accounts a on a.id = u.account_id where a.username = ?";
+
+    private static final String UPDATE_USER =
+            "update users set name = ?, address = ?, phone = ?, email = ? where id = ?";
     @Override
     public List<User> findAll() {
         return null;
@@ -143,5 +149,48 @@ public class UserRepository implements IUserRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        try(Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME)) {
+
+            statement.setString(1, username);
+            ResultSet resultSet =  statement.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setAccountId(resultSet.getInt("account_id"));
+                user.setAddress(resultSet.getString("address"));
+                user.setEmail(resultSet.getString("email"));
+                user.setName(resultSet.getString("name"));
+                user.setId(resultSet.getInt("id"));
+                user.setStatus(resultSet.getBoolean("status"));
+
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        try(Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_USER)){
+
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getAddress());
+            statement.setString(3, user.getPhone());
+            statement.setString(4, user.getEmail());
+            statement.setInt(5, user.getId());
+
+            int affectedRow = statement.executeUpdate();
+            return affectedRow == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
