@@ -21,6 +21,26 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public int countProduct() {
+        return repository.countProduct();
+    }
+
+    @Override
+    public int countProductWithFilter(String productName, int categoryId) {
+        return repository.countProductWithFilter(productName,categoryId);
+    }
+
+    @Override
+    public List<Product> findAllWithPagination(String productName, int categoryId, int offset, int pageSize) {
+        return repository.findAllWithPagination(productName,categoryId,offset,pageSize);
+    }
+
+    @Override
+    public List<Product> findAllNoneFilter(int offset, int pageSize) {
+        return repository.findAllNoneFilter(offset,pageSize);
+    }
+
+    @Override
     public boolean delete(int id) {
         return repository.delete(id);
     }

@@ -6,7 +6,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="web_dang_ky_style.css">
 </head>
 <body>
 <!--navbar-->
@@ -36,12 +35,17 @@
         </a>
 
         <div class="d-flex align-items-center" style="gap: 10px;">
-            <a class="nav-link d-flex align-items-center justify-content-center user-icon"
+            <a class="nav-link d-flex align-items-center justify-content-center position-relative user-icon"
                style="width: 40px; height: 40px;"
-               href="#"
-               data-bs-toggle="offcanvas" data-bs-target="#cartSidebar"
+               href="/cart"
             >
                 <i class="bi bi-cart" style="font-size: 1.25rem;"></i>
+
+                <span id="cart-count-badge"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      style="font-size: 0.7rem; display: none;">
+                        1
+                </span>
             </a>
 
             <a class="nav-link d-flex align-items-center justify-content-center user-icon"
