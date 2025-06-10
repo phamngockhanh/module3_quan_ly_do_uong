@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Title</title>
@@ -60,8 +61,13 @@
                     </div>
                 </td>
 
-                <td>${item.product.price}₫</td>
-                <td>${item.product.price * item.quantity}₫</td>
+                <td>
+                    <fmt:formatNumber value="${item.product.price}" type="number" groupingUsed="true" />₫
+                </td>
+                <td>
+                    <fmt:formatNumber value="${item.product.price * item.quantity}" type="number" groupingUsed="true" />₫
+                </td>
+
                 <td>
                     <!-- Button mở Modal -->
                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal${item.product.id}">
@@ -102,7 +108,9 @@
         <tfoot>
         <tr>
             <th colspan="4" class="text-end">Tổng cộng:</th>
-            <th colspan="2" class="text-start text-danger fs-5">${totalAmount}₫</th>
+            <th colspan="2" class="text-start text-danger fs-5">
+                <fmt:formatNumber value="${totalAmount}" type="number" groupingUsed="true" />₫
+            </th>
         </tr>
         </tfoot>
     </table>
