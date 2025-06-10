@@ -65,11 +65,11 @@
 <!-- Footer -->
 <jsp:include page="layout/footer.jsp"/>
 <script>
-    const serverError = "${error}";
+    let serverError = document.getElementById("error").value;
     if (serverError === "account-existed") {
         document.getElementById("error-username").textContent = "Tài khoản đã tồn tại.";
     }
-
+    document.getElementById("error").value = "";
     document.getElementById("username").addEventListener("input", () => {
         document.getElementById("error-username").textContent = "";
     });
