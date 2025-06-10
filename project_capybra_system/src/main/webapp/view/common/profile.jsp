@@ -11,27 +11,27 @@
 </head>
 <body>
 <!--Navbar-->
-<jsp:include page="layout/navbar_none_bg.jsp"/>
+<jsp:include page="/view/user/layout/navbar_none_bg.jsp"/>
 <!--form register-->
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
     <div class="register-box">
-        <h2 class="mb-4 text-center"><b>ĐĂNG KÝ</b></h2>
+        <h2 class="mb-4 text-center"><b>Thông tin tài khoản</b></h2>
         <form id="register-form" method="post" action="">
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Họ tên</label>
-                        <input type="text" class="form-control" name="name" id="fullName" placeholder="Nhập họ tên">
+                        <input type="text" class="form-control" name="name" id="fullName" placeholder="Nhập họ tên" value="${user.name}">
                         <div id="error-fullName" class="text-danger small mt-1"></div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" value="${user.name}">
                         <div id="error-password" class="text-danger small mt-1"></div>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Số điện thoại</label>
-                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại">
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại" value="${user.phone}">
                         <div id="error-phone" class="text-danger small mt-1"></div>
                     </div>
                 </div>
@@ -39,31 +39,32 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên tài khoản</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Nhập tên tài khoản">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Nhập tên tài khoản" disabled value="${user.username}">
                         <div id="error-username" class="text-danger small mt-1"></div>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ">
+                        <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ" value="${user.address}">
                         <div id="error-address" class="text-danger small mt-1"></div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" value="${user.email}">
                         <div id="error-email" class="text-danger small mt-1"></div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <input type="hidden" id="error" name="error" value="${error}">
-                <button type="submit" class="btn px-5">Đăng ký</button>
+                <button type="submit" class="btn btn-success px-5">Cập nhật</button>
+                <button type="reset" class="btn px-5">Hủy thay đổi</button>
+                <a type="button" href="/" class="btn btn-danger px-5">Trở về</a>
                 <div id="error-account" class="text-danger small mt-1"></div>
             </div>
         </form>
     </div>
 </div>
 <!-- Footer -->
-<jsp:include page="layout/footer.jsp"/>
+<jsp:include page="/view/user/layout/footer.jsp"/>
 </body>
 <script src="/assets/user/js/register-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
