@@ -4,6 +4,7 @@
 
 <html>
 <head>
+
     <title>Danh sách sản phẩm</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,20 +47,23 @@
     </style>
 </head>
 <body>
-
-<div class="d-flex align-items-center gap-3 p-3">
+<h1 style="margin-top: auto"> quản lý sản phẩm</h1>
+<div class="d-flex justify-content-between align-items-center gap-3 px-3 py-2">
+    <!-- Nhóm nút -->
     <div class="d-flex gap-2">
-        <button  onclick="window.location.href=`/managerProduct?action=addCategory`" type="button" class="btn btn-warning btn-sm">Thêm loại đồ uống</button>
+        <button onclick="window.location.href=`/managerProduct?action=addCategory`" type="button"
+                class="btn btn-warning btn-sm">Thêm loại đồ uống
+        </button>
         <button onclick="window.location.href=`/managerProduct?action=add`" type="button"
                 class="btn btn-warning btn-sm">Thêm đồ uống
         </button>
     </div>
 
-    <form method="get" action="/managerProduct" class="d-flex align-items-center gap-3 p-3">
-        
+    <!-- Form tìm kiếm -->
+    <form method="get" action="/managerProduct" class="d-flex align-items-center gap-3" style="margin-top: 20px">
         <input type="hidden" name="action" value="search"/>
 
-        <input  type="text" name="name"
+        <input type="text" name="name"
                class="form-control form-control-sm" placeholder="Tìm theo tên"
                style="width: 200px;" value="${param.name}"/>
 
@@ -75,15 +79,14 @@
 
         <button type="submit" class="btn btn-warning btn-sm">Tìm kiếm</button>
     </form>
-    </div>
-
-    <%--    <div class="ms-auto" style="width: 250px;">--%>
-    <%--        <div class="input-group">--%>
-    <%--            <input type="text" class="form-control" placeholder="Search" aria-label="Search"--%>
-    <%--                   aria-describedby="button-addon2">--%>
-    <%--            <button class="btn btn-warning" type="button" id="button-addon2">Search</button>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
+</div>
+<%--    <div class="ms-auto" style="width: 250px;">--%>
+<%--        <div class="input-group">--%>
+<%--            <input type="text" class="form-control" placeholder="Search" aria-label="Search"--%>
+<%--                   aria-describedby="button-addon2">--%>
+<%--            <button class="btn btn-warning" type="button" id="button-addon2">Search</button>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </div>
 <p style="color: red">${param.mess}</p>
 
