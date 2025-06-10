@@ -42,6 +42,7 @@
             color: #ffc107;
             cursor: pointer;
         }
+
     </style>
 </head>
 <body>
@@ -53,7 +54,9 @@
                 class="btn btn-warning btn-sm">Thêm đồ uống
         </button>
     </div>
+
     <form method="get" action="/managerProduct" class="d-flex align-items-center gap-3 p-3">
+        
         <input type="hidden" name="action" value="search"/>
 
         <input  type="text" name="name"
@@ -72,6 +75,7 @@
 
         <button type="submit" class="btn btn-warning btn-sm">Tìm kiếm</button>
     </form>
+    </div>
 
     <%--    <div class="ms-auto" style="width: 250px;">--%>
     <%--        <div class="input-group">--%>
@@ -175,9 +179,18 @@
         $('#tableProduct').DataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 5
+            "pageLength": 5,
+            "language": {
+                "info": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                "infoEmpty": "Không có dữ liệu",
+                "paginate": {
+                    "next": "Sau",
+                    "previous": "Trước"
+                }
+            }
         });
     });
+
 </script>
 </body>
 </html>

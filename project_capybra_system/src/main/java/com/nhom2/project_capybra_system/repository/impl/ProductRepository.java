@@ -209,14 +209,15 @@ public class ProductRepository implements IProductRepository {
 
 
     public boolean update(Product product) {
-        String UPDATE = "update products set name=?,price=?,category_id=?,status=? where id=?;";
+        String UPDATE = "update products set name=?,price=?,category_id=?,status=?,image=? where id=?;";
         try (Connection connection = DatabaseUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.setInt(3, product.getCategoryId());
             preparedStatement.setBoolean(4, product.getStatus());
-            preparedStatement.setInt(5, product.getId());
+            preparedStatement.setString(5,product.getImage());
+            preparedStatement.setInt(6, product.getId());
             int effectRow = preparedStatement.executeUpdate();
             return effectRow == 1;
         } catch (SQLException e) {
