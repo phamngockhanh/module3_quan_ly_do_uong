@@ -46,6 +46,7 @@ public class RegisterController extends HttpServlet {
 
             userService.addUserWithAccount(username, name, phone, address, email);
 
+            SessionUtil.set(req, "message", "register-success");
             resp.sendRedirect("/homepage");
 //            req.setAttribute("message", "register-success");
         }
