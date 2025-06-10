@@ -41,12 +41,17 @@
           <i class="bi bi-search" style="font-size: 1.25rem;"></i>
         </button>
       </form>
-      <a class="nav-link d-flex align-items-center justify-content-center user-icon"
+      <a class="nav-link d-flex align-items-center justify-content-center position-relative user-icon"
          style="width: 40px; height: 40px;"
-         href="#"
-         data-bs-toggle="offcanvas" data-bs-target="#cartSidebar"
+         href="/cart"
       >
         <i class="bi bi-cart" style="font-size: 1.25rem;"></i>
+
+        <span id="cart-count-badge"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="font-size: 0.7rem; display: none;">
+                        1
+                </span>
       </a>
 
       <c:if test="${empty sessionScope.account}">
