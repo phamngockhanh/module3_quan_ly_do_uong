@@ -57,10 +57,9 @@
                                  class="card-img-top rounded-0"
                                  style="width: 100%; height: 200px; object-fit: cover;">
                             <div class="icons d-flex justify-content-center gap-2 my-2">
-                                <form action="AddToCartServlet" method="post" style="display: inline;">
+                                <form action="AddToCartServlet" method="post" style="display: inline;" target="hidden_iframe">
                                     <input type="hidden" name="productId" value="${product.id}">
-                                    <button type="submit" class="btn btn-md btn-outline-warning me-2 add-to-cart-btn"
-                                            data-product-id="${product.id}"  aria-controls="cartSidebar">
+                                    <button type="submit" class="btn btn-md btn-outline-warning me-2 btn-add-to-cart" aria-controls="cartSidebar" data-product-id="${product.id}">
                                         <i class="bi bi-cart"></i>
                                     </button>
                                     <a href="product?action=detail&id=${product.id}"
@@ -81,74 +80,78 @@
             </div>
 
             <!-- Pagination (nằm giữa khối card) -->
-            <div class="d-flex justify-content-center my-4">
+            <div class="d-flex justify-content-center align-items-center gap-2 my-4">
                 <!-- Previous button -->
-                <form action="product" method="get" style="display:inline;">
+                <form action="product" method="get" class="m-0 p-0">
                     <input type="hidden" name="pageNumber" value="${currentPage - 1}"/>
                     <input type="hidden" name="categoryId" value="${selectedCategoryId}"/>
                     <input type="hidden" name="keyword" value="${keyword}"/>
-                    <button type="submit" class="btn btn-sm mx-1"
+                    <button type="submit" class="btn btn-sm px-3 py-2"
                             style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == 1 ? 'disabled' : ''}>
-                        Previous
+                        <
                     </button>
                 </form>
 
-                <!-- Current page button -->
-                <button disabled class="btn btn-sm mx-1"
-                        style="background-color: #ffe0b3; color: #cc3300; border: none; font-weight: bold;">
+                <!-- Current page button (to và đậm hơn) -->
+                <div class="px-4 py-2 rounded"
+                     style="background-color: #ffa64d; color: white; font-weight: bold; font-size: 1.2rem;">
                     ${currentPage} / ${totalPages}
-                </button>
+                </div>
 
                 <!-- Next button -->
-                <form action="product" method="get" style="display:inline;">
+                <form action="product" method="get" class="m-0 p-0">
                     <input type="hidden" name="pageNumber" value="${currentPage + 1}"/>
                     <input type="hidden" name="categoryId" value="${selectedCategoryId}"/>
                     <input type="hidden" name="keyword" value="${keyword}"/>
-                    <button type="submit" class="btn btn-sm mx-1"
+                    <button type="submit" class="btn btn-sm px-3 py-2"
                             style="background-color: #ffcc99; border: none; font-weight: bold;" ${currentPage == totalPages ? 'disabled' : ''}>
-                        Next
+                        >
                     </button>
                 </form>
             </div>
+
         </div>
 
     </div>
 </div>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 <!-- Footer -->
 <jsp:include page="layout/footer.jsp"/>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11; display: none;" id="toastContainer">
+    <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="toastBody">
+                Đã thêm sản phẩm vào giỏ hàng!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const buttons = document.querySelectorAll('.add-to-cart-btn');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                const productId = this.getAttribute('data-product-id');
-
-                fetch('AddToCartServlet', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'productId=' + encodeURIComponent(productId)
-                })
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log(data); // Hiện thông báo hoặc cập nhật UI giỏ hàng
-                        Swal.fire({
-                            title: 'Thành công!',
-                            text: 'Đã thêm sản phẩm vào giỏ hàng.',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        });
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-        });
+        var toastElement = document.getElementById('liveToast');
+        if (toastElement) {
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    window.addEventListener('message', function(event) {
+        console.log('Received message:', event.data);
+
+        if (event.data === 'addToCartSuccess') {
+            var toastContainer = document.getElementById('toastContainer');
+            toastContainer.style.display = 'block';
+
+            var toastElement = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+    });
+
+</script>
 </body>
 </html>

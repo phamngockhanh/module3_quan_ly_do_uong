@@ -13,10 +13,11 @@ import java.util.Map;
 
 @WebServlet("/AddToCartServlet")
 public class AddToCartController extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productIdStr = req.getParameter("productId");
-        if(productIdStr == null){
+        if (productIdStr == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.getWriter().write("Missing productId");
             return;
@@ -26,16 +27,14 @@ public class AddToCartController extends HttpServlet {
         HttpSession session = req.getSession();
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
 
-        if(cart == null) {
+        if (cart == null) {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
         }
 
         cart.put(productId, cart.getOrDefault(productId, 0) + 1);
-
         session.setAttribute("cart", cart);
 
-        resp.setContentType("text/plain");
-        resp.getWriter().write("Product added to cart");
+        req.getRequestDispatcher("/view/user/toast_success.jsp").forward(req, resp);
     }
 }
