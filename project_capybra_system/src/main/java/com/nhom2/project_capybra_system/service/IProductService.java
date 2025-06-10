@@ -11,4 +11,5 @@ public interface IProductService extends IService<Product> {
     List<Product> findAllNoneFilter(int offset, int pageSize);
     boolean add(Product product);
     boolean update(Product product);
+    List<Product> search(String name, Integer id);
 }

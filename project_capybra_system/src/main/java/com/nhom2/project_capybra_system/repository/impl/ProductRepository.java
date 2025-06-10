@@ -4,10 +4,8 @@ import com.nhom2.project_capybra_system.entity.Product;
 import com.nhom2.project_capybra_system.repository.IProductRepository;
 import com.nhom2.project_capybra_system.util.DatabaseUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.lang.reflect.Type;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -208,18 +206,59 @@ public class ProductRepository implements IProductRepository {
 
     public boolean update(Product product) {
         String UPDATE = "update products set name=?,price=?,category_id=?,status=? where id=?;";
-        try(Connection connection =DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement= connection.prepareStatement(UPDATE);) {
-            preparedStatement.setString(1,product.getName());
-            preparedStatement.setDouble(2,product.getPrice());
-            preparedStatement.setInt(3,product.getCategoryId());
-            preparedStatement.setBoolean(4,product.getStatus());
-            preparedStatement.setInt(5,product.getId());
-            int effectRow= preparedStatement.executeUpdate();
-            return effectRow==1;
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getCategoryId());
+            preparedStatement.setBoolean(4, product.getStatus());
+            preparedStatement.setInt(5, product.getId());
+            int effectRow = preparedStatement.executeUpdate();
+            return effectRow == 1;
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");
         }
         return false;
     }
+
+    public List<Product> search(String name, Integer id) {
+        List<Product> products = new ArrayList<>();
+        String SEARCH = "select * from products p where name like ? and (? is null or p.category_id=?);";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH);) {
+            preparedStatement.setString(1, "%" + name + "%");
+
+            if (id == null) {
+                preparedStatement.setNull(2, Types.INTEGER);
+                preparedStatement.setNull(3, Types.INTEGER);
+
+            } else {
+                preparedStatement.setInt(2, id);
+                preparedStatement.setInt(2, id);
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                while (resultSet.next()) {
+                    Product product = new Product();
+
+                    product.setId(resultSet.getInt("id"));
+                    product.setName(resultSet.getString("name"));
+                    product.setPrice(resultSet.getLong("price"));
+                    product.setCategoryId(resultSet.getInt("category_id"));
+                    product.setStatus(resultSet.getBoolean("status"));
+                    product.setDescription(resultSet.getString("description"));
+                    product.setImage(resultSet.getString("image"));
+                    product.setSize(resultSet.getString("size"));
+                    products.add(product);
+                }
+            }
+
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
+
 }

@@ -42,15 +42,19 @@ public class ProductService implements IProductService {
 
     @Override
     public boolean delete(int id) {
-        return  repository.delete(id);
+        return repository.delete(id);
     }
 
     @Override
     public boolean add(Product product) {
         return repository.add(product);
     }
- public boolean update(Product product){
+
+    public boolean update(Product product) {
         return repository.update(product);
 
+    }
+    public List<Product> search(String name, Integer id){
+        return repository.search(name,id);
     }
 }
