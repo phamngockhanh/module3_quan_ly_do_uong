@@ -6,6 +6,7 @@ import com.nhom2.project_capybra_system.repository.impl.CartRepository;
 import com.nhom2.project_capybra_system.service.ICartService;
 
 import java.util.List;
+import java.util.Map;
 
 public class CartService implements ICartService {
     private ICartRepository repository = new CartRepository();
@@ -30,5 +31,15 @@ public class CartService implements ICartService {
     public void addByAccountId(Integer userId) {
         Cart cart = new Cart(userId);
         repository.add(cart);
+    }
+
+    @Override
+    public Map<Integer, Integer> getUserCart(int userId) {
+        return  repository.getUserCart(userId);
+    }
+
+    @Override
+    public int getCartId(int userId) {
+        return repository.getCartId(userId);
     }
 }

@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <input type="hidden" id="error" name="error" value="${error}">
+                <input type="hidden" id="error" name="error" value="${not empty error ? error : ''}">
                 <button type="submit" class="btn px-5">Đăng ký</button>
                 <div id="error-account" class="text-danger small mt-1"></div>
             </div>
@@ -64,6 +64,16 @@
 </div>
 <!-- Footer -->
 <jsp:include page="layout/footer.jsp"/>
+<script>
+    let serverError = document.getElementById("error").value;
+    if (serverError === "account-existed") {
+        document.getElementById("error-username").textContent = "Tài khoản đã tồn tại.";
+    }
+    document.getElementById("error").value = "";
+    document.getElementById("username").addEventListener("input", () => {
+        document.getElementById("error-username").textContent = "";
+    });
+</script>
 </body>
 <script src="/assets/user/js/register-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>

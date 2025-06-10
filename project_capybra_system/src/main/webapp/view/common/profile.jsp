@@ -26,7 +26,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" value="${user.name}">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" disabled
+                               value="${not empty user ? '11111111' : ''}">
                         <div id="error-password" class="text-danger small mt-1"></div>
                     </div>
                     <div class="mb-3">
@@ -55,8 +56,9 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-success px-5">Cập nhật</button>
-                <button type="reset" class="btn px-5">Hủy thay đổi</button>
+                <input hidden="hidden" id="message" name="message" value="${message}">
+                <button type="submit" class="btn btn-outline-warning px-5">Cập nhật</button>
+                <button type="reset" class="btn btn-outline-warning px-5">Hủy thay đổi</button>
                 <a type="button" href="/" class="btn btn-danger px-5">Trở về</a>
                 <div id="error-account" class="text-danger small mt-1"></div>
             </div>
@@ -65,7 +67,31 @@
 </div>
 <!-- Footer -->
 <jsp:include page="/view/user/layout/footer.jsp"/>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let message = document.getElementById("message").value;
+        if (message === "update-success") {
+            Swal.fire({
+                title: 'Thành công!',
+                text: 'Cập nhật thông tin hoàn tất',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+
+        }else if (message === "update-success"){
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Cập nhật thất bại do lỗi.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+</script>
+
 </body>
 <script src="/assets/user/js/register-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

@@ -55,5 +55,20 @@ public class UserService implements IUserService {
         return repository.findUserAndAccountByAccountId(id);
     }
 
+    @Override
+    public int getUserId(int accountId) {
+        return repository.getUserId(accountId);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return repository.findByUsername(username);
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        return repository.updateUser(user);
+    }
+
 
 }

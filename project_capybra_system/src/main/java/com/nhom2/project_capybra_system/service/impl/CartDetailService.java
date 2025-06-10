@@ -24,5 +24,25 @@ public class CartDetailService implements ICartDetailService {
     public boolean delete(int id) {
         return false;
     }
+
+    @Override
+    public void updateCartDetail(int cartId, int productId, int quantity) {
+        repository.updateCartDetail(cartId,productId,quantity);
+    }
+
+    @Override
+    public void insertCartDetail(int cartId, int productId, int quantity) {
+        repository.insertCartDetail(cartId,productId,quantity);
+    }
+
+    @Override
+    public boolean existsCartDetail(int cartId, int productId) {
+        return repository.existsCartDetail(cartId,productId);
+    }
+
+    @Override
+    public int getQuantity(int cartId, int productId) {
+        return repository.getQuantity(cartId,productId);
+    }
 }
 
