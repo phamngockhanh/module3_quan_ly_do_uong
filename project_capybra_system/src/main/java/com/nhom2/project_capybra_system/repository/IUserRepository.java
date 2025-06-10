@@ -17,4 +17,6 @@ public interface IUserRepository extends IRepository<User> {
     User findByUsername(String username);
 
     boolean updateUser(User user);
+
+    int getUserId(int accountId);
 }

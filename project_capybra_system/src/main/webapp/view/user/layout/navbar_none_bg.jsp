@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -48,13 +49,34 @@
                 </span>
             </a>
 
-            <a class="nav-link d-flex align-items-center justify-content-center user-icon"
-               style="width: 40px; height: 40px;"
-               href="#"
-               data-bs-toggle="modal" data-bs-target="#loginModal"
-            >
-                <i class="bi bi-person" style="font-size: 1.25rem;"></i>
-            </a>
+            <c:if test="${empty sessionScope.account}">
+                <a class="nav-link d-flex align-items-center justify-content-center user-icon"
+                   style="width: 40px; height: 40px;"
+                   href="#"
+                   data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <i class="bi bi-person" style="font-size: 1.25rem;"></i>
+                </a>
+            </c:if>
+            <c:if test="${not empty sessionScope.account}">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center mx-2" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                            ${sessionScope.account.username}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow ">
+                        <li><a class="dropdown-item" href="/profile">Thông tin cá nhân</a></li>
+                        <c:if test="${sessionScope.account.roleId == 1}">
+                            <li><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.account.roleId == 2}">
+                            <li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>
+                        </c:if>
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/logout">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </c:if>
         </div>
 
     </nav>

@@ -56,6 +56,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public int getUserId(int accountId) {
+        return repository.getUserId(accountId);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return repository.findByUsername(username);
     }

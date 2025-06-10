@@ -13,6 +13,8 @@ public interface IUserService extends IService<User> {
     UserDto findUserAndAccountByUserId(int id);
 
     UserDto findUserAndAccountByAccountId(int id);
+    int getUserId(int accountId);
+
 
     User findByUsername(String username);
 
