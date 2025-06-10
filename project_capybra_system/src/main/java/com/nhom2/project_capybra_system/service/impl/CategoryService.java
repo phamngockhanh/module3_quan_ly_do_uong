@@ -24,4 +24,9 @@ public class CategoryService implements ICategoryService {
     public boolean delete(int id) {
         return false;
     }
+
+    @Override
+    public boolean addCategory(Category category) {
+        return false;
+    }
 }

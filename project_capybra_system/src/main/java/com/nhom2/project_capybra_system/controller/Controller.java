@@ -37,6 +37,8 @@ public class Controller extends HttpServlet {
             case "search":
                 search(req, resp);
                 break;
+            case "addCategory":
+                addCategory(req,resp);
             default:
                 List<Product> productList = productService.findAll();
                 req.setAttribute("productList", productList);
@@ -47,21 +49,27 @@ public class Controller extends HttpServlet {
 
     }
 
+    private void addCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/view/admin/addCategory.jsp").forward(req, resp);
+
+    }
+
+
+
     private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        String categoryIdRaw = req.getParameter("categoryId");
+        String categoryIdParam = req.getParameter("categoryId");
 
         Integer categoryId = null;
-        if (categoryId != null && !categoryIdRaw.isEmpty()) {
+        if (categoryIdParam != null && !categoryIdParam.trim().isEmpty()) {
             try {
-                categoryId = Integer.parseInt(categoryIdRaw);
+                categoryId = Integer.parseInt(categoryIdParam);
             } catch (NumberFormatException e) {
-                System.out.println("không tìm thấy sản phẩm");
+                categoryId = null; // hoặc log lỗi
             }
         }
         List<Product> productList = productService.search(name, categoryId);
         List<Category> categories = iCategoryService.findAll();
-
         req.setAttribute("productList", productList);
         req.setAttribute("categories", categories);
         req.getRequestDispatcher("/view/admin/managerProduct.jsp").forward(req, resp);    }
@@ -95,9 +103,20 @@ public class Controller extends HttpServlet {
             case "delete":
                 delete(req, resp);
                 break;
+            case "addCategory":
+                saveCategory(req,resp);
 
         }
     }
+
+    private void saveCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name= req.getParameter("name");
+        Category category = new Category(name);
+        categories.add(category);
+        resp.sendRedirect("/managerProduct?mess=add success");
+
+    }
+
     private void updateProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = Integer.valueOf(req.getParameter("id"));
         String name = req.getParameter("name");
@@ -130,7 +149,6 @@ public class Controller extends HttpServlet {
         productService.delete(deleteId);
         resp.sendRedirect("managerProduct?mess=delete success");
     }
-
 
 
 }
