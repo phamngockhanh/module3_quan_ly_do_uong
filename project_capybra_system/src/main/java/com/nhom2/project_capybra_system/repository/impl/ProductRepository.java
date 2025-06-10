@@ -1,5 +1,6 @@
 package com.nhom2.project_capybra_system.repository.impl;
 
+import com.nhom2.project_capybra_system.entity.Category;
 import com.nhom2.project_capybra_system.entity.Product;
 import com.nhom2.project_capybra_system.repository.IProductRepository;
 import com.nhom2.project_capybra_system.util.DatabaseUtil;
@@ -10,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements IProductRepository {
-    private static final String SELECT_ALL_PRODUCT = "select * from products";
+    private static final String SELECT_ALL_PRODUCT = "select * from products p order by p.id desc;";
     private static final String SELECT_PRODUCT_BY_ID = "select * from products where id = ?";
     private static final String COUNT_PRODUCT = "select count(*) from products;";
     private static final String SELECT_PRODUCT_PAGINATION = "select * from products ORDER BY id LIMIT ? OFFSET ?;";
     private static final String COUNT_PRODUCT_WITH_FILTER= "select count(*) from products where (name LIKE CONCAT('%', ?, '%') OR ? = '') AND (category_id = ? OR ? = 0)";
     private static final String SEARCH_BY_NAME_ID_CATEGORY ="select * from products where (name like concat('%', ?, '%') OR ? = '') AND (category_id = ? OR ? = 0) LIMIT ?,?;";
+
+
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
@@ -204,6 +207,7 @@ public class ProductRepository implements IProductRepository {
         return false;
     }
 
+
     public boolean update(Product product) {
         String UPDATE = "update products set name=?,price=?,category_id=?,status=? where id=?;";
         try (Connection connection = DatabaseUtil.getConnection();
@@ -223,42 +227,54 @@ public class ProductRepository implements IProductRepository {
 
     public List<Product> search(String name, Integer id) {
         List<Product> products = new ArrayList<>();
-        String SEARCH = "select * from products p where name like ? and (? is null or p.category_id=?);";
-        try (Connection connection = DatabaseUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH);) {
-            preparedStatement.setString(1, "%" + name + "%");
-
-            if (id == null) {
-                preparedStatement.setNull(2, Types.INTEGER);
-                preparedStatement.setNull(3, Types.INTEGER);
-
-            } else {
-                preparedStatement.setInt(2, id);
-                preparedStatement.setInt(2, id);
-            }
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                while (resultSet.next()) {
-                    Product product = new Product();
-
-                    product.setId(resultSet.getInt("id"));
-                    product.setName(resultSet.getString("name"));
-                    product.setPrice(resultSet.getLong("price"));
-                    product.setCategoryId(resultSet.getInt("category_id"));
-                    product.setStatus(resultSet.getBoolean("status"));
-                    product.setDescription(resultSet.getString("description"));
-                    product.setImage(resultSet.getString("image"));
-                    product.setSize(resultSet.getString("size"));
-                    products.add(product);
-                }
+        List<Product> productList = findAll();
+       for( Product products1: productList) {
+            if ((name == null || name.trim().isEmpty() ||
+                    products1.getName().toLowerCase().contains(name.toLowerCase()))
+                    &&
+                    (id == null || products1.getCategoryId() == id)) {
+                products.add(products1);
             }
 
-        }catch (Exception e){
-            throw new RuntimeException(e);
         }
         return products;
     }
+//        String SEARCH = "select * from products p where name like ? and (? is null or p.category_id=?);";
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH);) {
+//            preparedStatement.setString(1, "%" + name + "%");
+//
+//            if (id == null) {
+//                preparedStatement.setNull(2, Types.INTEGER);
+//                preparedStatement.setNull(3, Types.INTEGER);
+//
+//            } else {
+//                preparedStatement.setInt(2, id);
+//                preparedStatement.setInt(2, id);
+//            }
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            while (resultSet.next()) {
+//                while (resultSet.next()) {
+//                    Product product = new Product();
+//
+//                    product.setId(resultSet.getInt("id"));
+//                    product.setName(resultSet.getString("name"));
+//                    product.setPrice(resultSet.getLong("price"));
+//                    product.setCategoryId(resultSet.getInt("category_id"));
+//                    product.setStatus(resultSet.getBoolean("status"));
+//                    product.setDescription(resultSet.getString("description"));
+//                    product.setImage(resultSet.getString("image"));
+//                    product.setSize(resultSet.getString("size"));
+//                    products.add(product);
+//                }
+//            }
+//
+//        }catch (Exception e){
+//            throw new RuntimeException(e);
+//        }
+
+
 
 
 }
