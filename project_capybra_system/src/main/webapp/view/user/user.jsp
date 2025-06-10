@@ -51,7 +51,8 @@
                      class="img-fluid mb-3"
                      style="height: 200px; width: 200px; object-fit: cover; border: 1px solid yellow;">
                 <div class="icons mb-2">
-                    <button class="btn btn-sm btn-outline-warning me-2 add-to-cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar">
+                    <button class="btn btn-sm btn-outline-warning me-2 add-to-cart-btn" data-bs-toggle="offcanvas"
+                            data-bs-target="#cartSidebar" aria-controls="cartSidebar">
                         <i class="bi bi-cart"></i>
                     </button>
                     <a href="#" class="btn btn-sm btn-outline-secondary">
@@ -63,7 +64,8 @@
                 <p class="text-muted">45,000 VND</p>
                 <div class="text-warning">
                     ★★★★★
-                </div>q1
+                </div>
+                q1
             </div>
 
         </div>
@@ -83,17 +85,21 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" style="border-radius: 0"
-                               required/>
+                        <input type="text" class="form-control" id="username" name="username"
+                               placeholder="Nhập tên đăng nhập" style="border-radius: 0"
+                               required value="${username}"/>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" style="border-radius: 0"
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="Nhập mật khẩu" style="border-radius: 0"
                                required/>
                     </div>
+                    <input type="hidden" id="message" name="message" value="${message}">
                     <div class="text-end">
                         <small>Bạn chưa có tài khoản? <a href="/register"
-                                                         data-bs-target="#registerModal" style="color: #e3b159;">Đăng ký ngay</a></small>
+                                                         data-bs-target="#registerModal" style="color: #e3b159;">Đăng ký
+                            ngay</a></small>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -110,6 +116,41 @@
 </div>
 <!--off canvas sidebar-->
 <jsp:include page="layout/canvas_sidebar.jsp"/>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let message = document.getElementById("message").value;
+        if (message === "login-error") {
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Tài khoản hoặc mật khẩu không chính xác.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+
+            // Hiện lại modal đăng nhập
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }else if (message === "login-success"){
+            Swal.fire({
+                title: 'Thành công!',
+                text: 'Đăng nhập thành công.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            document.getElementById("message").value = "";
+        }else if (message === "register-success"){
+            Swal.fire({
+                title: 'Thành công!',
+                text: 'Đăng ký thành công, xin mời đăng nhập.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+</script>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

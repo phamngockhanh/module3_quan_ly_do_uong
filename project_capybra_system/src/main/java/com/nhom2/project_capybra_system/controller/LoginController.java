@@ -35,11 +35,16 @@ public class LoginController extends HttpServlet {
         Account account = accountService.checkLogin(username, password);
         if(account == null){
             req.setAttribute("username", username);
-            req.setAttribute("message", "loginError");
+            req.setAttribute("message", "login-error");
             req.getRequestDispatcher("/view/user/user.jsp").forward(req,resp);
         }else{
             SessionUtil.set(req, "account", account);
+            SessionUtil.set(req, "message", "login-success");
             resp.sendRedirect("/homepage");
+
+//            req.setAttribute("message", "login-success");
+//            req.getRequestDispatcher("/view/user/user.jsp").forward(req,resp);
+
         }
     }
 }

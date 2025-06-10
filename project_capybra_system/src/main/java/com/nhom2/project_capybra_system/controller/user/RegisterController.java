@@ -1,4 +1,4 @@
-package com.nhom2.project_capybra_system.controller;
+package com.nhom2.project_capybra_system.controller.user;
 
 import com.nhom2.project_capybra_system.entity.Account;
 import com.nhom2.project_capybra_system.entity.Cart;
@@ -47,6 +47,7 @@ public class RegisterController extends HttpServlet {
             userService.addUserWithAccount(username, name, phone, address, email);
 
             resp.sendRedirect("/homepage");
+//            req.setAttribute("message", "register-success");
         }
 
     }

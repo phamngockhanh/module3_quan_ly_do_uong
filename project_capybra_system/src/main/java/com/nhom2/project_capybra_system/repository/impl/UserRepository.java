@@ -26,6 +26,12 @@ public class UserRepository implements IUserRepository {
                     "from users u inner join accounts a on u.account_id = a.id where a.id = ?;";
 
     private static final String GET_USER_ID = "select id from users where account_id = ?;";
+
+    private static final String FIND_BY_USERNAME =
+            "select u.* from users u inner join accounts a on a.id = u.account_id where a.username = ?";
+
+    private static final String UPDATE_USER =
+            "update users set name = ?, address = ?, phone = ?, email = ? where id = ?";
     @Override
     public List<User> findAll() {
         return null;
@@ -145,21 +151,5 @@ public class UserRepository implements IUserRepository {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    public int getUserId(int accountId) {
-        int userId = -1;
-        try(Connection connection = DatabaseUtil.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_ID)){
-            preparedStatement.setInt(1,accountId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                userId = resultSet.getInt("id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return userId;
     }
 }
