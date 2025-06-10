@@ -41,7 +41,7 @@
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput4" class="form-label">Hình ảnh</label>
-        <input name="image" required value="${product.image}" type="text" class="form-control" id="formGroupExampleInput4" placeholder="Statucs">
+        <input name="image" required value="${product.image}" type="text" class="form-control" id="formGroupExampleInput4" placeholder="Hình ảnh">
     </div>
 
     <div class="d-flex gap-2">
