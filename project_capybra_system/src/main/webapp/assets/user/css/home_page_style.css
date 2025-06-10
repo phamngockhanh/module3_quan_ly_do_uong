@@ -51,3 +51,13 @@ nav {
 }
 
 
+.nav-dropdown {
+    font-size: larger;
+    padding: 20%;
+}
+
+.nav-dropdown:hover {
+    background-color: black;
+    color: white;
+}
+

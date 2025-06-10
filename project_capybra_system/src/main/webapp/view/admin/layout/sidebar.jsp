@@ -7,7 +7,8 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="./index.html" class="text-nowrap logo-img">
-                <img src="${adminAssetsPath}/images/logos/logo.svg" alt=""/>
+<%--                <img src="${adminAssetsPath}/images/logos/logo.svg" alt=""/>--%>
+                <h3 class="text-dark mb-2 mb-lg-0 fs-5 text-center fw-bolder">CHỨC NĂNG</h3>
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-6"></i>

@@ -11,4 +11,6 @@ public interface IUserService extends IService<User> {
     List<UserDto> findAllUserAndAccount();
 
     UserDto findUserAndAccountByUserId(int id);
+
+    UserDto findUserAndAccountByAccountId(int id);
 }

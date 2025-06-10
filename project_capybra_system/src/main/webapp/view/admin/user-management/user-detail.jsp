@@ -65,6 +65,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="d-flex justify-content-end">
+                                            <a type="button" class="btn-warning btn mx-2" href="/admin/user-management">Trở về</a>
                                             <c:if test="${user.accountStatus == true}">
                                                 <button type="button" class="btn-danger btn" onclick="deleteInfo('${user.username}', '${user.username}')"
                                                         data-bs-toggle="modal" data-bs-target="#exampleModal">Khóa tài khoản</button>

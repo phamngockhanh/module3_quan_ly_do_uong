@@ -34,7 +34,7 @@ public class RegisterController extends HttpServlet {
         String username = req.getParameter("username");
         if(accountService.findByUsername(username) != null){
             req.setAttribute("error", "account-existed");
-            req.getRequestDispatcher("/view/user/register.jsp");
+            req.getRequestDispatcher("/view/user/register.jsp").forward(req, resp);
         }else{
             String password = req.getParameter("password");
             Account account = new Account(username, password);
