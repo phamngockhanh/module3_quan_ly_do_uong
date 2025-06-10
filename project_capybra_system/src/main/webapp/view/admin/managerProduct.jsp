@@ -8,10 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <%--    <link rel="stylesheet" href="bootstrap520/css/bootstrap.min.css"/>--%>
-    <%--    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap5.min.css"/>--%>
-    <%--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
-
     <!-- DataTables CSS + JS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -21,8 +17,7 @@
         table.table-hover > tbody > tr:hover {
             background-color: #fff9c4 !important;
         }
-    </style>
-    <style>
+
         .form-control:focus {
             border-color: #ffc107 !important;
             box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
@@ -76,14 +71,6 @@
         <button type="submit" class="btn btn-warning btn-sm">Tìm kiếm</button>
     </form>
     </div>
-
-    <%--    <div class="ms-auto" style="width: 250px;">--%>
-    <%--        <div class="input-group">--%>
-    <%--            <input type="text" class="form-control" placeholder="Search" aria-label="Search"--%>
-    <%--                   aria-describedby="button-addon2">--%>
-    <%--            <button class="btn btn-warning" type="button" id="button-addon2">Search</button>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
 </div>
 <p style="color: red">${param.mess}</p>
 
