@@ -1,5 +1,6 @@
 package com.nhom2.project_capybra_system.service.impl;
 
+import com.nhom2.project_capybra_system.dto.OrderDto;
 import com.nhom2.project_capybra_system.entity.Order;
 import com.nhom2.project_capybra_system.repository.IOrderRepository;
 import com.nhom2.project_capybra_system.repository.impl.OrderRepository;
@@ -23,5 +24,10 @@ public class OrderService implements IOrderService {
     @Override
     public boolean delete(int id) {
         return false;
+    }
+
+    @Override
+    public List<OrderDto> findAllByNameAndStatusId(String name, int statusId) {
+        return repository.findAllByNameAndStatusId(name, statusId);
     }
 }

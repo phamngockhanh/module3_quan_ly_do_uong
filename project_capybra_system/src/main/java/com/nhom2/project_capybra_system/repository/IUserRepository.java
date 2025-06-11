@@ -19,4 +19,6 @@ public interface IUserRepository extends IRepository<User> {
     boolean updateUser(User user);
 
     int getUserId(int accountId);
+
+    List<UserDto> findAllUserAndAccountByNameAndAccountStatus(String findName, int findStatus);
 }

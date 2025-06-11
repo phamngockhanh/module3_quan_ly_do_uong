@@ -5,10 +5,7 @@ import com.nhom2.project_capybra_system.entity.User;
 import com.nhom2.project_capybra_system.repository.IUserRepository;
 import com.nhom2.project_capybra_system.util.DatabaseUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +29,11 @@ public class UserRepository implements IUserRepository {
 
     private static final String UPDATE_USER =
             "update users set name = ?, address = ?, phone = ?, email = ? where id = ?";
+
+    private static final String FIND_ALL_USER_ACCOUNT_BY_NAME_AND_STATUS =
+            " select u.*, a.username, a.status as account_status, a.password, a.role_id " +
+                    "from users u inner join accounts a on u.account_id = a.id " +
+                    "where a.role_id = 1 and u.name like ? and a.status like ?;";
     @Override
     public List<User> findAll() {
         return null;
@@ -210,5 +212,37 @@ public class UserRepository implements IUserRepository {
             e.printStackTrace();
         }
         return userId;
+    }
+
+    @Override
+    public List<UserDto> findAllUserAndAccountByNameAndAccountStatus(String findName, int findStatus) {
+        List<UserDto> userDtos = new ArrayList<>();
+        try(Connection connection = DatabaseUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(FIND_ALL_USER_ACCOUNT_BY_NAME_AND_STATUS)) {
+
+            statement.setString(1, "%" + findName + "%");
+            statement.setString(2, "%" + (findStatus == -1 ? "" : findStatus) + "%");
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                UserDto user = new UserDto();
+
+                user.setUserId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAddress(resultSet.getString("address"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setAccountId(resultSet.getInt("account_id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setRoleId(resultSet.getInt("role_id"));
+                user.setAccountStatus(resultSet.getBoolean("account_status"));
+
+                userDtos.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userDtos;
     }
 }
