@@ -1,6 +1,9 @@
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+html, body {
+    font-family: 'Poppins', sans-serif;
+}
 
 .card:hover {
     transform: translateY(-10px); /* nâng lên 10px */

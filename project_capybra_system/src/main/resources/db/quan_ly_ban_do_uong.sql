@@ -152,8 +152,27 @@ values
  ("Nước mía", 10000, 2, 1, "", "",""),
  ("Coca cola", 13000, 3, 1, "", "","");
  
+ insert into order_status (name)
+ values ("Chờ xử lý"), ("Đã xử lý"), ("Đã hủy");
+ 
+ 
+ insert into orders (user_id, order_date, order_status_id)
+ values
+ (4, "2025-6-5", 2),
+ (5, "2025-6-4", 1),
+ (6, "2025-6-5", 2),
+ (6, "2025-6-6", 1),
+ (7, "2025-6-10", 1);
+ 
+ 
  select u.*, a.username, a.password, a.role_id from users u inner join accounts a on u.account_id = a.id;
  
- select * from users;
+ select * from users where name like "%%" and status like "%%";
+ 
+ select u.*, o.id as order_id, o.order_date, o.order_status_id from users u 
+ inner join orders o on u.id = o.user_id where u.name like "%%" and o.order_status_id like "%%" order by o.order_date desc;
+ 
+ 
+ 
  
  

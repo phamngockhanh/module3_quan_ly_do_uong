@@ -7,4 +7,5 @@ public interface ICartDetailRepository extends IRepository<CartDetail>{
     void insertCartDetail(int cartId,int productId, int quantity);
     boolean existsCartDetail(int cartId, int productId);
     int getQuantity(int cartId, int productId);
+    boolean  deleteCartDetail(int cartId, int productId);
 }

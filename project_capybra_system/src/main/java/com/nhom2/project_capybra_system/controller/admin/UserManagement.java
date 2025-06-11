@@ -23,7 +23,6 @@ public class UserManagement extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String userIdStr = req.getParameter("userId");
         if (userIdStr != null) {
             UserDto userDto = userService.findUserAndAccountByUserId(Integer.parseInt(userIdStr));
@@ -31,8 +30,15 @@ public class UserManagement extends HttpServlet {
 
             req.getRequestDispatcher("/view/admin/user-management/user-detail.jsp").forward(req, resp);
         } else {
-            List<UserDto> userDtoList = userService.findAllUserAndAccount();
-            req.setAttribute("users", userDtoList);
+            String findStatus = req.getParameter("status");
+            String findName = req.getParameter("name");
+            if (findName == null) findName = "";
+            if (findStatus == null) findStatus = "-1";
+
+            List<UserDto> userDtos = userService.findAllUserAndAccountByNameAndAccountStatus(findName, Integer.parseInt(findStatus));
+            req.setAttribute("users", userDtos);
+            req.setAttribute("name", findName);
+            req.setAttribute("status", findStatus);
             req.getRequestDispatcher("/view/admin/user-management/user-list.jsp").forward(req, resp);
         }
     }

@@ -19,4 +19,6 @@ public interface IUserService extends IService<User> {
     User findByUsername(String username);
 
     boolean updateUser(User user);
+
+    List<UserDto> findAllUserAndAccountByNameAndAccountStatus(String findName, int findStatus);
 }
