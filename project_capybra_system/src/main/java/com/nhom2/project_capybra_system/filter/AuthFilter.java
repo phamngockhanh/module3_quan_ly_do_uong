@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/admin/*"})
+@WebFilter(urlPatterns = {"/admin/*", "/history-order"})
 public class AuthFilter extends HttpFilter {
 
     @Override
