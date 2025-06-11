@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-body row">
                         <div class="col-md-12 mt-5">
-                            <h2 class="mb-4">Danh sách người dùng</h2>
+                            <h2 class="mb-4">Quản lý đơn hàng</h2>
                             <table id="userTable" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
@@ -38,9 +38,12 @@
                                         <form class="d-flex align-content-start" action="" method="get">
                                             <input type="text" class="form-control w-50" placeholder="Nhập tên..." name="name" value="${name}">
                                             <select class="form-select w-25" name="status">
-                                                <option value="-1" <c:if test="${status == -1 || empty status}">selected</c:if>>--> Trạng thái tài khoản <--</option>
-                                                <option value="1" <c:if test="${status == 1}">selected</c:if>>Hoạt động</option>
-                                                <option value="0" <c:if test="${status == 0}">selected</c:if>>Bị khóa</option>
+                                                <option value="0" <c:if test="${status == 0 || empty status}">selected</c:if>>--> Trạng thái đơn hàng <--</option>
+                                                <c:forEach var="item" items="${orderStatusList}">
+                                                    <option value="${item.id}"
+                                                    <c:if test="${item.id == status}">selected</c:if>
+                                                    >${item.name}</option>
+                                                </c:forEach>
                                             </select>
                                             <button class="btn btn-outline-warning w-25">Tìm kiếm</button>
                                         </form>
@@ -51,23 +54,26 @@
                                 <thead class="table-primary">
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên tài khoản</th>
                                     <th>Họ và tên</th>
+                                    <th>Ngày đặt</th>
                                     <th>Trạng thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="item" items="${users}" varStatus="index">
+                                <c:forEach var="item" items="${orderList}" varStatus="index">
                                     <tr>
                                         <td>${index.count}</td>
-                                        <td>${item.username}</td>
                                         <td>${item.name}</td>
-                                        <td>${item.accountStatus ? '<span class="badge bg-success">Hoạt động</span>' :
-                                                '<span class="badge bg-danger">Bị khóa</span>' }</td>
+                                        <td>${item.orderDate}</td>
                                         <td>
-                                            <form method="get" action="/admin/user-management">
-                                                <input type="hidden" name="userId" value="${item.userId}">
+                                            <c:if test="${item.orderStatusId == 1}"><span class="badge bg-warning">Chờ xử lý</span></c:if>
+                                            <c:if test="${item.orderStatusId == 2}"><span class="badge bg-success">Đã xử lý</span></c:if>
+                                            <c:if test="${item.orderStatusId == 3}"><span class="badge bg-danger">Đã hủy</span></c:if>
+                                        </td>
+                                        <td>
+                                            <form method="get" action="/admin/order-management">
+                                                <input type="hidden" name="orderId" value="${item.orderId}">
                                                 <button class="btn btn-outline-info">Chi tiết</button>
                                             </form>
                                         </td>

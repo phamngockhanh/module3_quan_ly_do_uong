@@ -12,7 +12,7 @@ public class OrderStatusService implements IOrderStatusService {
 
     @Override
     public List<OrderStatus> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override

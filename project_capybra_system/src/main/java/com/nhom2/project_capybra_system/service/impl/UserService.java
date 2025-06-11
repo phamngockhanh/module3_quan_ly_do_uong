@@ -70,5 +70,10 @@ public class UserService implements IUserService {
         return repository.updateUser(user);
     }
 
+    @Override
+    public List<UserDto> findAllUserAndAccountByNameAndAccountStatus(String findName, int findStatus) {
+        return repository.findAllUserAndAccountByNameAndAccountStatus(findName, findStatus);
+    }
+
 
 }
