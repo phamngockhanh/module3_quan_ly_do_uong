@@ -138,7 +138,8 @@
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
-            document.getElementById("message").value = "";
+
+            //
         }else if (message === "register-success"){
             Swal.fire({
                 title: 'Thành công!',
@@ -146,7 +147,22 @@
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
+        }else if (message === "unauthorized"){
+            Swal.fire({
+                title: 'Thông báo!',
+                text: 'Vui lòng đăng nhập.',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }else if (message === "access-denied"){
+            Swal.fire({
+                title: 'Thông báo!',
+                text: 'Bạn không thể sử dụng chức năng này.',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
         }
+        document.getElementById("message").value = "";
     });
 </script>
 

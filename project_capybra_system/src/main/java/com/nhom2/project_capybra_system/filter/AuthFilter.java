@@ -1,6 +1,7 @@
 package com.nhom2.project_capybra_system.filter;
 
 import com.nhom2.project_capybra_system.entity.Account;
+import com.nhom2.project_capybra_system.util.SessionUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
@@ -23,13 +24,17 @@ public class AuthFilter extends HttpFilter {
         Account account = (session != null) ? (Account) session.getAttribute("account") : null;
 
         if(account == null){
-            resp.sendRedirect("/homepage?message=unauthorized");
+            SessionUtil.set(req, "message", "unauthorized");
+            resp.sendRedirect("/homepage");
             return;
         }
 
         String uri = req.getRequestURI();
         if(uri.startsWith(req.getContextPath() + "/admin") && account.getRoleId() != 2){
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
+//            resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
+            SessionUtil.set(req, "message", "access-denied");
+            resp.sendRedirect("/homepage");
+
             return;
         }
 
