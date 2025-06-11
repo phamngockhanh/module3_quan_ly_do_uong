@@ -66,7 +66,7 @@
                     <ul class="dropdown-menu dropdown-menu-end shadow ">
                         <li><a class="dropdown-item" href="/profile">Thông tin cá nhân</a></li>
                         <c:if test="${sessionScope.account.roleId == 1}">
-                            <li><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></li>
+                            <li><a class="dropdown-item" href="/history-order">Lịch sử đơn hàng</a></li>
                         </c:if>
                         <c:if test="${sessionScope.account.roleId == 2}">
                             <li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>
@@ -80,6 +80,47 @@
         </div>
 
     </nav>
+</div>
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0; box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4);">
+            <form method="post" action="/login">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="loginModalLabel">ĐĂNG NHẬP</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                               placeholder="Nhập tên đăng nhập" style="border-radius: 0"
+                               required value="${username}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="Nhập mật khẩu" style="border-radius: 0"
+                               required/>
+                    </div>
+                    <input type="hidden" id="message" name="message" value="${message}">
+                    <div class="text-end">
+                        <small>Bạn chưa có tài khoản? <a href="/register"
+                                                         data-bs-target="#registerModal" style="color: #e3b159;">Đăng ký
+                            ngay</a></small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-transparent"
+                            style="border-radius: 0; border:1px solid orange; ">Đăng nhập
+                    </button>
+                    <button type="button" class="btn btn-warning " style="border-radius: 0;" data-bs-dismiss="modal">
+                        Đóng
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

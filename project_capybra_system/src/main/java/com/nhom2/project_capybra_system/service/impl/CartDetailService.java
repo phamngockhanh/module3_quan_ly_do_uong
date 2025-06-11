@@ -44,5 +44,10 @@ public class CartDetailService implements ICartDetailService {
     public int getQuantity(int cartId, int productId) {
         return repository.getQuantity(cartId,productId);
     }
+
+    @Override
+    public boolean deleteCartDetail(int cartId, int productId) {
+        return repository.deleteCartDetail(cartId,productId);
+    }
 }
 

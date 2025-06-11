@@ -8,4 +8,5 @@ public interface ICartDetailService  extends IService<CartDetail> {
     void insertCartDetail(int cartId,int productId, int quantity);
     boolean existsCartDetail(int cartId, int productId);
     int getQuantity(int cartId, int productId);
+    boolean deleteCartDetail(int cartId, int productId);
 }

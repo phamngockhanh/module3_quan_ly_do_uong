@@ -42,13 +42,12 @@ public class AddToCartController extends HttpServlet {
             int userId = userService.getUserId(account.getId());
             int cartId = cartService.getCartId(userId);
 
-            Map<Integer, Integer> userCart = cartService.getUserCart(userId);
-            int existingQuantity = userCart.getOrDefault(productId, 0);
-
-            if (existingQuantity > 0) {
-                cartDetailService.updateCartDetail(cartId, productId, existingQuantity);
-            } else {
-                cartDetailService.insertCartDetail(cartId, productId, 1);
+            boolean exists = cartDetailService.existsCartDetail(cartId,productId);
+            if(exists){
+                int existingQuantity = cartDetailService.getQuantity(cartId,productId);
+                cartDetailService.updateCartDetail(cartId,productId,existingQuantity+1);
+            }else{
+                cartDetailService.insertCartDetail(cartId,productId,1);
             }
 
         } else {
