@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-body row">
                         <div class="col-md-12 mt-5">
-                            <h2 class="mb-4">Thêm sản phẩm mới</h2>
+                            <h2 class="mb-4">Cập nhật sản phẩm</h2>
                             <form method="post">
                                 <table class="table">
                                     <tr class="row">
@@ -39,14 +39,14 @@
                                                 <label for="formGroupExampleInput0" class="form-label">Tên sản phẩm</label>
                                                 <input pattern="[A-Za-zÀ-ỹà-ỹ0-9\s]+" title="Không nhập kí tự đặc biệt"
                                                        name="name" required value="${product.name}" type="text" class="form-control"
-                                                       id="formGroupExampleInput0" placeholder=" Tên sản phẩm">
+                                                       id="formGroupExampleInput0" placeholder="Nhập tên sản phẩm">
                                             </div>
                                         </td>
                                         <td class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="formGroupExampleInput" class="form-label">Giá (VND)</label>
                                                 <input pattern="[0-9]+" title="Chỉ nhập số" name="price" required value="${product.price}"
-                                                       type="text" class="form-control" id="formGroupExampleInput" placeholder="Giá">
+                                                       type="text" class="form-control" id="formGroupExampleInput" placeholder="Nhập giá sản phẩm">
                                             </div>
                                         </td>
                                     </tr>
@@ -66,10 +66,10 @@
                                         </td>
                                         <td class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">Trạng Thái</label>
-                                                <select name="status" class="form-control" id="formGroupExampleInput3" required>
+                                                <label class="form-label">Trạng thái</label>
+                                                <select name="status" class="form-select" id="formGroupExampleInput3" required>
                                                     <option value="true" ${product.status == 'true' ? 'selected' : ''}>Còn hàng</option>
-<%--                                                    <option value="false" ${product.status == 'false' ? 'selected' : ''}>Hết hàng</option>--%>
+                                                    <option value="false" ${product.status == 'false' ? 'selected' : ''}>Hết hàng</option>
                                                 </select>
                                             </div>
                                         </td>
@@ -79,16 +79,17 @@
                                             <div class="mb-3">
                                                 <label for="formGroupExampleInput4" class="form-label">Hình Ảnh</label>
                                                 <input name="image" required value="${product.image}" type="text" class="form-control"
-                                                       id="formGroupExampleInput4" placeholder="Hình ảnh">
+                                                       id="formGroupExampleInput4" placeholder="Nhập đường dẫn hình ảnh">
                                             </div>
                                         </td>
                                     </tr>
                                 </table>
 
                                 <div class="d-flex gap-2">
-                                    <button type="submit" class="btn btn-warning btn-sm">Thêm sản phẩm</button>
+                                    <button type="submit" class="btn btn-warning btn-sm">Cập nhật</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

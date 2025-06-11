@@ -80,7 +80,7 @@ public class ProductManagement extends HttpServlet {
         Product product = productService.findById(id);
         req.setAttribute("categories", categories);
         req.setAttribute("product", product);
-        req.getRequestDispatcher("/view/admin/product-management/product-form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/view/admin/product-management/product-update.jsp").forward(req, resp);
     }
 
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
