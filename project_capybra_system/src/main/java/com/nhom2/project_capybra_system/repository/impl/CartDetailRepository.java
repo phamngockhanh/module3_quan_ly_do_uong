@@ -16,6 +16,7 @@ public class CartDetailRepository implements ICartDetailRepository {
     private static final String INSERT_CART_DETAIL = "insert into cart_details (cart_id,product_id,quantity) values (?,?,?);";
     private static final String CHECK_EXISTED_PRODUCT = "SELECT COUNT(*) FROM cart_details WHERE cart_id = ? AND product_id = ?;";
     private static final String GET_QUANTITY = "SELECT quantity FROM cart_details WHERE cart_id = ? AND product_id = ?;";
+    private static final String DELETE_CART_DETAIL = "delete from cart_details where cart_id = ? AND product_id = ?;";
     @Override
     public List<CartDetail> findAll() {
         return null;
@@ -89,6 +90,20 @@ public class CartDetailRepository implements ICartDetailRepository {
             ex.printStackTrace();
         }
         return quantity;
+    }
+
+    @Override
+    public boolean  deleteCartDetail(int cartId, int productId) {
+        try(Connection connection = DatabaseUtil.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CART_DETAIL)){
+            preparedStatement.setInt(1,cartId);
+            preparedStatement.setInt(2,productId);
+            int affectRows = preparedStatement.executeUpdate();
+            return  affectRows>0;
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Title</title>
@@ -71,7 +72,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title" name="productName">${product.name}</h5>
                                 <p class="card-text" name="description">${product.description}</p>
-                                <p class="text-muted" name="price">${product.price} <b>VNĐ</b></p>
+                                <p class="text-muted" name="price"><b><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" /></b> VNĐ</p>
                             </div>
                         </div>
 

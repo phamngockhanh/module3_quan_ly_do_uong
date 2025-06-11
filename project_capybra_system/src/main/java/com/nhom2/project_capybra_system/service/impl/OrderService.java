@@ -1,5 +1,6 @@
 package com.nhom2.project_capybra_system.service.impl;
 
+import com.nhom2.project_capybra_system.dto.OrderSummaryDto;
 import com.nhom2.project_capybra_system.entity.Order;
 import com.nhom2.project_capybra_system.repository.IOrderRepository;
 import com.nhom2.project_capybra_system.repository.impl.OrderRepository;
@@ -23,5 +24,15 @@ public class OrderService implements IOrderService {
     @Override
     public boolean delete(int id) {
         return false;
+    }
+
+    @Override
+    public void placeOrder(int userId, String[] productIds, String[] quantities, int cartId) {
+        repository.placeOrder(userId,productIds,quantities,cartId);
+    }
+
+    @Override
+    public List<OrderSummaryDto> getOrderSummariesByUserId(int userId) {
+        return repository.getOrderSummariesByUserId(userId);
     }
 }

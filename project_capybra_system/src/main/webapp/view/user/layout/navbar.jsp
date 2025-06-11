@@ -71,7 +71,7 @@
           <ul class="dropdown-menu dropdown-menu-end shadow ">
             <li><a class="dropdown-item" href="/profile">Thông tin cá nhân</a></li>
             <c:if test="${sessionScope.account.roleId == 1}">
-              <li><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></li>
+              <li><a class="dropdown-item" href="/history-order">Lịch sử đơn hàng</a></li>
             </c:if>
             <c:if test="${sessionScope.account.roleId == 2}">
               <li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>
