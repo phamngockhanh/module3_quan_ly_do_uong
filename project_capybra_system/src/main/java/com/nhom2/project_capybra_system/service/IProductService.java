@@ -12,4 +12,5 @@ public interface IProductService extends IService<Product> {
     boolean add(Product product);
     boolean update(Product product);
     List<Product> search(String name, Integer id);
+    boolean delete(int id);
 }
